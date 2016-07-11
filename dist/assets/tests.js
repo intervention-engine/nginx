@@ -474,6 +474,23 @@ define('ember-on-fhir/tests/components/patient-badge.jshint', ['exports'], funct
     assert.ok(true, 'components/patient-badge.js should pass jshint.');
   });
 });
+define('ember-on-fhir/tests/components/patient-print-badge.jscs-test', ['exports'], function (exports) {
+  'use strict';
+
+  module('JSCS - components');
+  test('components/patient-print-badge.js should pass jscs', function () {
+    ok(true, 'components/patient-print-badge.js should pass jscs.');
+  });
+});
+define('ember-on-fhir/tests/components/patient-print-badge.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - components');
+  QUnit.test('components/patient-print-badge.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'components/patient-print-badge.js should pass jshint.');
+  });
+});
 define('ember-on-fhir/tests/components/patient-risk-chart.jscs-test', ['exports'], function (exports) {
   'use strict';
 
@@ -644,6 +661,23 @@ define('ember-on-fhir/tests/components/patient-viewer.jshint', ['exports'], func
     assert.ok(true, 'components/patient-viewer.js should pass jshint.');
   });
 });
+define('ember-on-fhir/tests/components/remove-discussed-patient-modal.jscs-test', ['exports'], function (exports) {
+  'use strict';
+
+  module('JSCS - components');
+  test('components/remove-discussed-patient-modal.js should pass jscs', function () {
+    ok(true, 'components/remove-discussed-patient-modal.js should pass jscs.');
+  });
+});
+define('ember-on-fhir/tests/components/remove-discussed-patient-modal.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - components');
+  QUnit.test('components/remove-discussed-patient-modal.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'components/remove-discussed-patient-modal.js should pass jshint.');
+  });
+});
 define('ember-on-fhir/tests/components/review-patient-modal.jscs-test', ['exports'], function (exports) {
   'use strict';
 
@@ -710,6 +744,23 @@ define('ember-on-fhir/tests/components/vertical-bar-chart.jshint', ['exports'], 
   QUnit.test('components/vertical-bar-chart.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'components/vertical-bar-chart.js should pass jshint.');
+  });
+});
+define('ember-on-fhir/tests/config/ember-spinner/large.jscs-test', ['exports'], function (exports) {
+  'use strict';
+
+  module('JSCS - config/ember-spinner');
+  test('config/ember-spinner/large.js should pass jscs', function () {
+    ok(true, 'config/ember-spinner/large.js should pass jscs.');
+  });
+});
+define('ember-on-fhir/tests/config/ember-spinner/large.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - config/ember-spinner');
+  QUnit.test('config/ember-spinner/large.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'config/ember-spinner/large.js should pass jshint.');
   });
 });
 define('ember-on-fhir/tests/config/ember-spinner/small.jscs-test', ['exports'], function (exports) {
@@ -829,6 +880,23 @@ define('ember-on-fhir/tests/controllers/patients/index.jshint', ['exports'], fun
   QUnit.test('controllers/patients/index.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'controllers/patients/index.js should pass jshint.');
+  });
+});
+define('ember-on-fhir/tests/controllers/patients/print.jscs-test', ['exports'], function (exports) {
+  'use strict';
+
+  module('JSCS - controllers/patients');
+  test('controllers/patients/print.js should pass jscs', function () {
+    ok(true, 'controllers/patients/print.js should pass jscs.');
+  });
+});
+define('ember-on-fhir/tests/controllers/patients/print.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - controllers/patients');
+  QUnit.test('controllers/patients/print.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'controllers/patients/print.js should pass jshint.');
   });
 });
 define('ember-on-fhir/tests/controllers/patients/show.jscs-test', ['exports'], function (exports) {
@@ -1879,6 +1947,23 @@ define('ember-on-fhir/tests/models/risk-assessment.jshint', ['exports'], functio
     assert.ok(true, 'models/risk-assessment.js should pass jshint.');
   });
 });
+define('ember-on-fhir/tests/models/risk-event.jscs-test', ['exports'], function (exports) {
+  'use strict';
+
+  module('JSCS - models');
+  test('models/risk-event.js should pass jscs', function () {
+    ok(true, 'models/risk-event.js should pass jscs.');
+  });
+});
+define('ember-on-fhir/tests/models/risk-event.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - models');
+  QUnit.test('models/risk-event.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'models/risk-event.js should pass jshint.');
+  });
+});
 define('ember-on-fhir/tests/models/slice.jscs-test', ['exports'], function (exports) {
   'use strict';
 
@@ -2047,6 +2132,23 @@ define('ember-on-fhir/tests/routes/patients/index.jshint', ['exports'], function
   QUnit.test('routes/patients/index.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'routes/patients/index.js should pass jshint.');
+  });
+});
+define('ember-on-fhir/tests/routes/patients/print.jscs-test', ['exports'], function (exports) {
+  'use strict';
+
+  module('JSCS - routes/patients');
+  test('routes/patients/print.js should pass jscs', function () {
+    ok(true, 'routes/patients/print.js should pass jscs.');
+  });
+});
+define('ember-on-fhir/tests/routes/patients/print.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - routes/patients');
+  QUnit.test('routes/patients/print.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'routes/patients/print.js should pass jshint.');
   });
 });
 define('ember-on-fhir/tests/routes/patients/show.jscs-test', ['exports'], function (exports) {
