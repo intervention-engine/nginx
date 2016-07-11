@@ -2834,27 +2834,27 @@ fieldset[disabled] a.btn {
 
 .btn-default {
   color: #333;
-  background-color: #5D8FAE;
+  background-color: #fff;
   border-color: #ccc; }
   .btn-default:focus, .btn-default.focus {
     color: #333;
-    background-color: #487490;
+    background-color: #e6e6e6;
     border-color: #8c8c8c; }
   .btn-default:hover {
     color: #333;
-    background-color: #487490;
+    background-color: #e6e6e6;
     border-color: #adadad; }
   .btn-default:active, .btn-default.active,
   .open > .btn-default.dropdown-toggle {
     color: #333;
-    background-color: #487490;
+    background-color: #e6e6e6;
     border-color: #adadad; }
     .btn-default:active:hover, .btn-default:active:focus, .btn-default:active.focus, .btn-default.active:hover, .btn-default.active:focus, .btn-default.active.focus,
     .open > .btn-default.dropdown-toggle:hover,
     .open > .btn-default.dropdown-toggle:focus,
     .open > .btn-default.dropdown-toggle.focus {
       color: #333;
-      background-color: #3c6178;
+      background-color: #d4d4d4;
       border-color: #8c8c8c; }
   .btn-default:active, .btn-default.active,
   .open > .btn-default.dropdown-toggle {
@@ -2863,10 +2863,10 @@ fieldset[disabled] a.btn {
   fieldset[disabled] .btn-default:hover,
   fieldset[disabled] .btn-default:focus,
   fieldset[disabled] .btn-default.focus {
-    background-color: #5D8FAE;
+    background-color: #fff;
     border-color: #ccc; }
   .btn-default .badge {
-    color: #5D8FAE;
+    color: #fff;
     background-color: #333; }
 
 .btn-primary {
@@ -2908,28 +2908,28 @@ fieldset[disabled] a.btn {
 
 .btn-success {
   color: #fff;
-  background-color: #5cb85c;
-  border-color: #4cae4c; }
+  background-color: #41C682;
+  border-color: #37b775; }
   .btn-success:focus, .btn-success.focus {
     color: #fff;
-    background-color: #449d44;
-    border-color: #255625; }
+    background-color: #31a369;
+    border-color: #195536; }
   .btn-success:hover {
     color: #fff;
-    background-color: #449d44;
-    border-color: #398439; }
+    background-color: #31a369;
+    border-color: #298857; }
   .btn-success:active, .btn-success.active,
   .open > .btn-success.dropdown-toggle {
     color: #fff;
-    background-color: #449d44;
-    border-color: #398439; }
+    background-color: #31a369;
+    border-color: #298857; }
     .btn-success:active:hover, .btn-success:active:focus, .btn-success:active.focus, .btn-success.active:hover, .btn-success.active:focus, .btn-success.active.focus,
     .open > .btn-success.dropdown-toggle:hover,
     .open > .btn-success.dropdown-toggle:focus,
     .open > .btn-success.dropdown-toggle.focus {
       color: #fff;
-      background-color: #398439;
-      border-color: #255625; }
+      background-color: #298857;
+      border-color: #195536; }
   .btn-success:active, .btn-success.active,
   .open > .btn-success.dropdown-toggle {
     background-image: none; }
@@ -2937,10 +2937,10 @@ fieldset[disabled] a.btn {
   fieldset[disabled] .btn-success:hover,
   fieldset[disabled] .btn-success:focus,
   fieldset[disabled] .btn-success.focus {
-    background-color: #5cb85c;
-    border-color: #4cae4c; }
+    background-color: #41C682;
+    border-color: #37b775; }
   .btn-success .badge {
-    color: #5cb85c;
+    color: #41C682;
     background-color: #fff; }
 
 .btn-info {
@@ -4229,9 +4229,9 @@ a.label:hover, a.label:focus {
     background-color: #487490; }
 
 .label-success {
-  background-color: #5cb85c; }
+  background-color: #41C682; }
   .label-success[href]:hover, .label-success[href]:focus {
-    background-color: #449d44; }
+    background-color: #31a369; }
 
 .label-info {
   background-color: #5bc0de; }
@@ -4459,7 +4459,7 @@ a.thumbnail.active {
   animation: progress-bar-stripes 2s linear infinite; }
 
 .progress-bar-success {
-  background-color: #5cb85c; }
+  background-color: #41C682; }
   .progress-striped .progress-bar-success {
     background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -7972,7 +7972,8 @@ button.close {
 /* -------------------------------- DOM -------------------------------- */
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300; }
+  font-weight: 300;
+  padding-bottom: 2em; }
 
 h1 {
   font-size: 4.8em;
@@ -8012,13 +8013,28 @@ ul {
     border-color: #5D8FAE;
     color: #fff; }
 
-.btn-primary {
-  width: 200px;
-  height: 45px;
-  background-color: #5D8FAE;
-  border-color: darker(#5D8FAE, 10%);
+.btn-primary,
+.btn-ie,
+.btn-ie-lg {
   border-radius: 0;
-  font-size: 20px; }
+  font-size: 20px;
+  height: 45px; }
+
+.btn-primary,
+.btn-ie-lg {
+  width: 200px;
+  height: 45px; }
+
+.btn-primary {
+  background-color: #5D8FAE;
+  border-color: #487490; }
+
+.fa-rounded {
+  color: #5C5C5C;
+  background-color: #f9f9f9;
+  border-radius: 50%;
+  font-size: 14px;
+  padding: 0.28em; }
 
 /* -------------------------------- OTHER -------------------------------- */
 #ember-fhir {
@@ -8076,7 +8092,8 @@ svg {
   font-size: 1.3em;
   color: #5C5C5C; }
   .filter-counts .count {
-    min-width: 150px; }
+    min-width: 150px;
+    margin: 0; }
     .filter-counts .count .count-value {
       display: inline-block;
       min-width: 160px;
@@ -8141,10 +8158,11 @@ svg {
     .filter-details .save-new-filter .pane-input input {
       padding-left: 10px;
       height: 45px;
-      width: 325px;
-      font-size: 20px; }
+      width: 350px;
+      font-size: 20px;
+      margin: 15px; }
     .filter-details .save-new-filter button {
-      margin: 0 1px 5px 10px; }
+      margin: 5px 1px 5px 10px; }
 
 .selected-filter-details {
   margin-left: 35px;
@@ -8190,6 +8208,13 @@ svg {
     height: 100px;
     margin: 0 15px 0 0;
     text-align: center; }
+    @media only screen and (min-width: 768px) and (max-width: 1199px) {
+      .pane .pane-icon {
+        font-size: 1.5em;
+        width: 50px;
+        height: 50px;
+        padding: 2px 0;
+        margin: 20px 10px 0 -8px; } }
   .pane .pane-content {
     float: right;
     padding: 0; }
@@ -8230,13 +8255,17 @@ svg {
 
 .pane-input input {
   padding: 0;
+  margin: 0;
   border: 1px solid #8f8f8f; }
   .pane-input input.age {
     width: 40px;
     text-align: center; }
   .pane-input input.condition, .pane-input input.encounter {
-    width: 245px;
+    width: 600px;
     padding-left: 10px; }
+    @media only screen and (min-width: 768px) and (max-width: 1199px) {
+      .pane-input input.condition, .pane-input input.encounter {
+        width: 230px; } }
 
 form {
   margin: 10px;
@@ -8328,7 +8357,6 @@ input[type=radio].css-checkbox {
 input[type=checkbox].css-checkbox + label.css-label,
 input[type=radio].css-checkbox + label.css-label {
   display: inline-block;
-  height: 30px;
   line-height: 30px;
   background-repeat: no-repeat;
   background-position: 0 0;
@@ -8419,9 +8447,10 @@ input:-webkit-autofill:focus {
 
 /* ------------------------- SLIDING SEARCH BOX ---------------------------- */
 .sliding-search-container {
+  display: inline-block;
   position: relative; }
   .sliding-search-container .fa {
-    color: #333;
+    color: #5C5C5C;
     font-size: 12px;
     position: absolute;
     top: 4px;
@@ -8451,9 +8480,9 @@ input:-webkit-autofill:focus {
 
 .sliding-search:focus,
 .sliding-search.expanded {
-  width: 180px;
+  width: 250px;
   padding-left: 20px;
-  color: #000;
+  color: #5C5C5C;
   background-color: #fff;
   cursor: auto; }
 
@@ -8608,6 +8637,15 @@ input:-webkit-autofill:focus {
   #chooseSortBy .btn-active .fa {
     color: #fff; }
 
+.table > thead > tr.th-no-bottom > th {
+  border-bottom: 0; }
+
+.table > thead > tr.th-no-top > th {
+  border-top: 0; }
+
+.table > thead > tr > th.th-border-bottom {
+  border-bottom: 2px solid #ddd; }
+
 /* ------------------------- LOGIN ----------------------------------------- */
 .form-login {
   margin: 50px 40px 33px 40px; }
@@ -8659,6 +8697,7 @@ input:-webkit-autofill:focus {
     .patients .patient-list-results .patient-panel .patient-list .patient-badge .media-left {
       padding-right: 1em; }
     .patients .patient-list-results .patient-panel .patient-list .patient-badge .patient-name {
+      margin-left: 10px;
       font-size: 24px; }
     .patients .patient-list-results .patient-panel .patient-list .patient-badge .patient-age-gender-location,
     .patients .patient-list-results .patient-panel .patient-list .patient-badge .patient-next-huddle {
@@ -8669,7 +8708,7 @@ input:-webkit-autofill:focus {
       .patients .patient-list-results .patient-panel .patient-list .patient-badge .patient-next-huddle .patient-age,
       .patients .patient-list-results .patient-panel .patient-list .patient-badge .patient-next-huddle .patient-gender,
       .patients .patient-list-results .patient-panel .patient-list .patient-badge .patient-next-huddle .patient-location {
-        margin-right: 1em; }
+        margin: 0 12px; }
     .patients .patient-list-results .patient-panel .patient-list .patient-badge .patient-risk-bar-container {
       position: absolute;
       top: 34%;
@@ -8677,13 +8716,13 @@ input:-webkit-autofill:focus {
       height: 24px; }
       @media only screen and (min-width: 1600px) {
         .patients .patient-list-results .patient-panel .patient-list .patient-badge .patient-risk-bar-container {
-          width: 175px; } }
+          width: 350px; } }
       @media only screen and (min-width: 1200px) and (max-width: 1599px) {
         .patients .patient-list-results .patient-panel .patient-list .patient-badge .patient-risk-bar-container {
-          width: 175px; } }
+          width: 200px; } }
       @media only screen and (min-width: 768px) and (max-width: 1199px) {
         .patients .patient-list-results .patient-panel .patient-list .patient-badge .patient-risk-bar-container {
-          width: 85px; } }
+          width: 150px; } }
       @media only screen and (max-width: 767px) {
         .patients .patient-list-results .patient-panel .patient-list .patient-badge .patient-risk-bar-container {
           width: 250px; } }
@@ -8709,6 +8748,12 @@ input:-webkit-autofill:focus {
         background-color: #fff; }
     .patients .patient-list-results .patient-panel .patient-list .patient-badge:nth-child(odd) {
       background-color: #f9f9f9; }
+
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+  .patients .patient-show {
+    position: absolute;
+    left: 10px;
+    padding: 0; } }
 
 .patients .patient-summary .media {
   background-color: #5D8FAE;
@@ -8797,21 +8842,17 @@ input:-webkit-autofill:focus {
 
 .patients .aster-plot {
   margin: 0 auto;
-  padding: 20px; }
+  padding: 10px;
+  width: 400px; }
   @media only screen and (min-width: 1200px) and (max-width: 1599px) {
     .patients .aster-plot {
-      padding: 20px 5px; } }
-  @media only screen and (min-width: 768px) and (max-width: 1199px) {
-    .patients .aster-plot {
-      width: 400px; } }
+      width: 315px; } }
   .patients .aster-plot .category {
     cursor: pointer; }
 
 .patients .category-details {
+  margin: auto;
   font-size: 18px; }
-  @media only screen and (min-width: 1600px) {
-    .patients .category-details {
-      width: 450px; } }
   @media only screen and (min-width: 768px) and (max-width: 1199px) {
     .patients .category-details {
       width: 400px;
@@ -8820,20 +8861,29 @@ input:-webkit-autofill:focus {
     font-size: 1.7em;
     text-align: center;
     padding: 10px; }
-  .patients .category-details .category-stat-value {
-    font-weight: 500; }
+  .patients .category-details .category-stat {
+    margin: auto; }
+    @media only screen and (min-width: 1600px) {
+      .patients .category-details .category-stat {
+        width: 80%; } }
+    .patients .category-details .category-stat .category-stat-label {
+      text-align: right;
+      line-height: 30px; }
+    .patients .category-details .category-stat .category-stat-value {
+      font-size: 1.2em;
+      font-weight: 500;
+      text-align: right; }
   .patients .category-details .sub-text {
     font-size: 0.9em;
     text-align: center; }
 
+.patient-timeline-wide-container {
+  clear: both;
+  margin: 40px;
+  padding-top: 20px; }
+
 .timeline {
-  margin: 20px auto; }
-  @media only screen and (min-width: 1200px) and (max-width: 1599px) {
-    .timeline {
-      margin: 20px 0 0 80px; } }
-  @media only screen and (min-width: 768px) and (max-width: 1199px) {
-    .timeline {
-      margin: 20px 0 0 80px; } }
+  margin: 0 10px 0 30px; }
   .timeline .timeline-icon-search .timeline-icon {
     margin-left: -15px;
     float: left;
@@ -8884,7 +8934,7 @@ input:-webkit-autofill:focus {
         .timeline .timeline-events .timeline-event .timeline-event-icon i {
           font-size: 25px;
           line-height: 28px;
-          margin-left: 5px; }
+          margin: 1px 0 0 4px; }
       .timeline .timeline-events .timeline-event .timeline-event-text {
         font-size: 20px;
         font-weight: 500; }
@@ -9139,7 +9189,7 @@ div.cs-skin-border {
 .search {
   margin: 15px auto;
   padding: 0 10px;
-  border: 1px solid whitesmoke;
+  border: 1px solid gainsboro;
   border-radius: 15px;
   height: 28px;
   font-size: 16px; }
@@ -9161,7 +9211,7 @@ div.cs-skin-border {
     width: 90%;
     margin-left: 15px; }
   .search.search-timeline {
-    margin-left: 35px; }
+    margin-left: 70px; }
 
 .badge.count {
   background-color: #FFFFFF;
@@ -9189,6 +9239,22 @@ div.cs-skin-border {
   position: relative;
   min-height: 300px; }
 
+.col-no-pad {
+  padding: 0; }
+
+.alert.alert-full {
+  position: relative;
+  width: auto;
+  top: 0;
+  left: 0;
+  padding: 15px; }
+
+.text-danger {
+  color: #d9534f; }
+
+.text-success {
+  color: #41C682; }
+
 .patient-risk-chart .c3-area {
   stroke-width: 0;
   opacity: 1; }
@@ -9197,9 +9263,19 @@ div.cs-skin-border {
   stroke-width: 1px;
   stroke: white;
   fill: #5D8FAE !important; }
+  .patient-risk-chart .c3-circle._selected_ {
+    fill: #d9534f !important; }
+
+.patient-risk-chart .c3-selected-circle {
+  stroke-width: 0;
+  fill: #d9534f !important; }
 
 .patient-risk-chart .c3-tooltip {
   color: #333; }
+
+.aster-plot-container {
+  min-height: 300px;
+  position: relative; }
 
 .intervention-list-group {
   cursor: pointer; }
@@ -9213,13 +9289,13 @@ div.cs-skin-border {
     font-size: 30px;
     line-height: 1.4; }
   .intervention-list-group .active .fa-check-circle {
-    color: #5cb85c; }
+    color: #41C682; }
   .intervention-list-group .intervention-list-group-item {
     padding: 20px 30px; }
     .intervention-list-group .intervention-list-group-item:hover .fa-check-circle {
       color: darkgray; }
     .intervention-list-group .intervention-list-group-item.active:hover .fa-check-circle {
-      color: #5cb85c; }
+      color: #41C682; }
   .intervention-list-group header {
     font-size: 24px;
     line-height: 26px;
@@ -9247,7 +9323,9 @@ div.cs-skin-border {
     color: #5C5C5C; }
 
 #patientViewerPikaday {
-  padding-top: 0.5em; }
+  padding-top: 0.5em;
+  width: 258px;
+  margin: 0 auto; }
 
 #patientViewerPikadayCalendar .pika-single {
   z-index: 1; }
@@ -9255,11 +9333,15 @@ div.cs-skin-border {
 .patient-viewer-schedule-block {
   margin-top: 0.5em;
   font-weight: 400;
-  text-align: center; }
+  text-align: center;
+  position: relative; }
+  .patient-viewer-schedule-block .action-icons {
+    position: absolute;
+    top: 0;
+    right: 0; }
   .patient-viewer-schedule-block .fa {
     color: #5D8FAE;
-    cursor: pointer;
-    margin-top: 6px; }
+    cursor: pointer; }
   .patient-viewer-schedule-block .meta {
     font-size: 0.8em;
     color: #5C5C5C; }
@@ -9290,6 +9372,13 @@ div.cs-skin-border {
   .add-to-huddle-modal-body label {
     display: block;
     text-align: right; }
+  .review-patient-modal-body textarea,
+  .add-to-huddle-modal-body textarea {
+    width: 100%; }
+  .review-patient-modal-body textarea[disabled],
+  .add-to-huddle-modal-body textarea[disabled] {
+    cursor: not-allowed;
+    background-color: #eee; }
 
 .is-today .pika-button {
   color: #E2495C; }
@@ -9312,5 +9401,21 @@ div.cs-skin-border {
   top: 0;
   left: 0;
   width: auto; }
+
+.current-risk-date {
+  text-align: center;
+  font-size: 18px;
+  padding-top: 1em; }
+
+@media print {
+  .hide-in-print {
+    display: none; }
+  .print-small {
+    font-size: 0.5em; } }
+
+.list-label {
+  font-weight: 600;
+  text-align: right;
+  padding-right: 10px; }
 
 /*# sourceMappingURL=ember-on-fhir.css.map */
