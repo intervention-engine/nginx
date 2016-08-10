@@ -219,6 +219,23 @@ define('ember-on-fhir/tests/components/category-details.jshint', ['exports'], fu
     assert.ok(true, 'components/category-details.js should pass jshint.');
   });
 });
+define('ember-on-fhir/tests/components/coding-typeahead.jscs-test', ['exports'], function (exports) {
+  'use strict';
+
+  module('JSCS - components');
+  test('components/coding-typeahead.js should pass jscs', function () {
+    ok(true, 'components/coding-typeahead.js should pass jscs.');
+  });
+});
+define('ember-on-fhir/tests/components/coding-typeahead.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - components');
+  QUnit.test('components/coding-typeahead.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'components/coding-typeahead.js should pass jshint.');
+  });
+});
 define('ember-on-fhir/tests/components/condition-code-filter.jscs-test', ['exports'], function (exports) {
   'use strict';
 
@@ -1331,6 +1348,23 @@ define('ember-on-fhir/tests/helpers/start-app.jshint', ['exports'], function (ex
   QUnit.test('helpers/start-app.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'helpers/start-app.js should pass jshint.');
+  });
+});
+define('ember-on-fhir/tests/helpers/uniqBy.jscs-test', ['exports'], function (exports) {
+  'use strict';
+
+  module('JSCS - helpers');
+  test('helpers/uniqBy.js should pass jscs', function () {
+    ok(true, 'helpers/uniqBy.js should pass jscs.');
+  });
+});
+define('ember-on-fhir/tests/helpers/uniqBy.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - helpers');
+  QUnit.test('helpers/uniqBy.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'helpers/uniqBy.js should pass jshint.');
   });
 });
 define('ember-on-fhir/tests/helpers/validate-properties', ['exports', 'ember', 'ember-qunit'], function (exports, _ember, _emberQunit) {
@@ -2451,6 +2485,62 @@ define('ember-on-fhir/tests/unit/helpers/generate-uuid-test.jshint', ['exports']
   QUnit.test('unit/helpers/generate-uuid-test.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/helpers/generate-uuid-test.js should pass jshint.');
+  });
+});
+define('ember-on-fhir/tests/unit/models/codeable-concept-test', ['exports', 'ember-qunit', 'ember-runloop'], function (exports, _emberQunit, _emberRunloop) {
+
+  (0, _emberQunit.moduleForModel)('codeable-concept', 'Unit | Model | codeable-concept', {
+    // Specify the other units that are required for this test.
+    needs: ['model:identifier', 'model:codeable-concept', 'model:location', 'model:period', 'model:coding', 'model:reference', 'model:quantity', 'model:range', 'model:condition-stage-component', 'model:condition-evidence-component']
+  });
+
+  (0, _emberQunit.test)('a codeable-concept.coding with a display has the correct displayText', function (assert) {
+    var model = this.subject();
+    var store = this.store();
+    (0, _emberRunloop['default'])(function () {
+      var coding = store.createRecord('coding', {
+        'system': 'http://www.ama-assn.org/go/cpt',
+        'code': '99201',
+        'display': 'Outpatient Encounter'
+      });
+      model.get('coding').pushObject(coding);
+      assert.equal(model.get('displayText'), 'Outpatient Encounter');
+    });
+  });
+
+  (0, _emberQunit.test)('a codeable-concept with a text has the correct displayText', function (assert) {
+    var model = this.subject({ 'text': 'My Encounter' });
+    assert.equal(model.get('displayText'), 'My Encounter');
+  });
+
+  (0, _emberQunit.test)('a codeable-concept.coding without a display has the correct displayText', function (assert) {
+    var model = this.subject();
+    var store = this.store();
+    (0, _emberRunloop['default'])(function () {
+      var coding = store.createRecord('coding', {
+        'system': 'http://www.ama-assn.org/go/cpt',
+        'code': '99201'
+      });
+      model.get('coding').pushObject(coding);
+      assert.equal(model.get('displayText'), 'CPT 99201');
+    });
+  });
+});
+define('ember-on-fhir/tests/unit/models/codeable-concept-test.jscs-test', ['exports'], function (exports) {
+  'use strict';
+
+  module('JSCS - unit/models');
+  test('unit/models/codeable-concept-test.js should pass jscs', function () {
+    ok(true, 'unit/models/codeable-concept-test.js should pass jscs.');
+  });
+});
+define('ember-on-fhir/tests/unit/models/codeable-concept-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/models');
+  QUnit.test('unit/models/codeable-concept-test.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/models/codeable-concept-test.js should pass jshint.');
   });
 });
 define('ember-on-fhir/tests/unit/models/condition-test', ['exports', 'ember-qunit', 'moment'], function (exports, _emberQunit, _moment) {

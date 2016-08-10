@@ -8167,6 +8167,13 @@ svg {
 .selected-filter-details {
   margin-left: 35px;
   line-height: 40px; }
+  .selected-filter-details button.close {
+    float: none;
+    display: inline-block; }
+
+.selected-filter-details-spaced {
+  margin-top: 1em;
+  margin-bottom: 1em; }
 
 .add-new-filter, .add-new-filter-lg {
   font-size: 0.8em;
@@ -8235,7 +8242,7 @@ svg {
         display: block;
         position: absolute;
         top: 30px;
-        left: -18px;
+        left: -17px;
         border-top: 18px solid transparent;
         border-bottom: 18px solid transparent;
         border-right: 18px solid #EEEEEE; }
@@ -8253,19 +8260,21 @@ svg {
 .pane-inner-label {
   padding: 0 5px; }
 
-.pane-input input {
-  padding: 0;
-  margin: 0;
-  border: 1px solid #8f8f8f; }
-  .pane-input input.age {
-    width: 40px;
-    text-align: center; }
-  .pane-input input.condition, .pane-input input.encounter {
-    width: 600px;
-    padding-left: 10px; }
-    @media only screen and (min-width: 768px) and (max-width: 1199px) {
-      .pane-input input.condition, .pane-input input.encounter {
-        width: 230px; } }
+.pane-input {
+  display: inline-block; }
+  .pane-input input {
+    padding: 0;
+    margin: 0;
+    border: 1px solid #8f8f8f; }
+    .pane-input input.age {
+      width: 40px;
+      text-align: center; }
+    .pane-input input.condition, .pane-input input.encounter {
+      width: 500px;
+      padding-left: 10px; }
+      @media only screen and (min-width: 768px) and (max-width: 1199px) {
+        .pane-input input.condition, .pane-input input.encounter {
+          width: 230px; } }
 
 form {
   margin: 10px;
@@ -9362,24 +9371,6 @@ div.cs-skin-border {
   outline: none;
   text-decoration: none; }
 
-.review-patient-modal-body,
-.add-to-huddle-modal-body {
-  margin: 25px 60px; }
-  .review-patient-modal-body .form-group,
-  .add-to-huddle-modal-body .form-group {
-    margin: 0; }
-  .review-patient-modal-body label,
-  .add-to-huddle-modal-body label {
-    display: block;
-    text-align: right; }
-  .review-patient-modal-body textarea,
-  .add-to-huddle-modal-body textarea {
-    width: 100%; }
-  .review-patient-modal-body textarea[disabled],
-  .add-to-huddle-modal-body textarea[disabled] {
-    cursor: not-allowed;
-    background-color: #eee; }
-
 .is-today .pika-button {
   color: #E2495C; }
 
@@ -9417,5 +9408,36 @@ div.cs-skin-border {
   font-weight: 600;
   text-align: right;
   padding-right: 10px; }
+
+.review-patient-modal-body,
+.add-to-huddle-modal-body,
+.logout-modal-body {
+  margin: 25px 60px; }
+  .review-patient-modal-body .form-group,
+  .add-to-huddle-modal-body .form-group,
+  .logout-modal-body .form-group {
+    margin: 0; }
+  .review-patient-modal-body label,
+  .add-to-huddle-modal-body label,
+  .logout-modal-body label {
+    display: block;
+    text-align: right; }
+  .review-patient-modal-body textarea,
+  .add-to-huddle-modal-body textarea,
+  .logout-modal-body textarea {
+    width: 100%; }
+  .review-patient-modal-body textarea[disabled],
+  .add-to-huddle-modal-body textarea[disabled],
+  .logout-modal-body textarea[disabled] {
+    cursor: not-allowed;
+    background-color: #eee; }
+
+.logout-modal-body .logout-modal-body-text {
+  font-size: 1.2em; }
+
+.logout-modal-body i {
+  font-size: 2em;
+  color: #E2495C;
+  margin-right: 10px; }
 
 /*# sourceMappingURL=ember-on-fhir.css.map */
