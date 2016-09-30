@@ -37,12 +37,12 @@ http {
         root   /usr/share/nginx/html;
 
         auth_basic  "Restricted"; #Basic Auth
-        auth_basic_user_file /etc/nginx/htpasswd; #Basic Auth User File
+        auth_basic_user_file /config/htpasswd; #Basic Auth User File
 
         listen 443 ssl;
 
-        ssl_certificate /etc/nginx/ssl/nginx.crt;
-        ssl_certificate_key /etc/nginx/ssl/nginx.key;
+        ssl_certificate /config/nginx.crt;
+        ssl_certificate_key /config/nginx.key;
 
         #charset koi8-r;
 
@@ -57,7 +57,7 @@ http {
         }
 
         location @proxy {
-          proxy_pass ${IE_URL};
+          proxy_pass {{ default .Env.FHIR_URL "http://ie-server:3001" }};
           proxy_set_header Host $host;
         }
 
