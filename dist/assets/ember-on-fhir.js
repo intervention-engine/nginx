@@ -116,41 +116,6 @@ define('ember-on-fhir/authorizers/ie', ['exports', 'ember', 'ember-simple-auth/a
     }
   });
 });
-define('ember-on-fhir/components/add-intervention-modal/intervention-detail', ['exports', 'ember'], function (exports, _ember) {
-  exports['default'] = _ember['default'].Component.extend({
-    classNames: ['intervention-list-group-item'],
-    classNameBindings: ['_active:active'],
-
-    _registeredParent: null,
-    _active: false,
-
-    intervention: null,
-    detail: '',
-
-    init: function init() {
-      this._super.apply(this, arguments);
-      _ember['default'].run.scheduleOnce('actions', this, this._registerWithParent);
-    },
-
-    click: function click() {
-      this.attrs.expand(this);
-    },
-
-    slideUp: function slideUp() {
-      this.$('.collapsible-panel').slideUp();
-      this.set('_active', false);
-    },
-
-    slideDown: function slideDown() {
-      this.$('.collapsible-panel').slideDown();
-      this.set('_active', true);
-    },
-
-    _registerWithParent: function _registerWithParent() {
-      this.attrs.registerDetailItem(this);
-    }
-  });
-});
 define('ember-on-fhir/components/add-intervention-modal', ['exports', 'ember', 'ember-on-fhir/utils/true-null-property'], function (exports, _ember, _emberOnFhirUtilsTrueNullProperty) {
   var computed = _ember['default'].computed;
 
@@ -209,6 +174,41 @@ define('ember-on-fhir/components/add-intervention-modal', ['exports', 'ember', '
     }
   });
 });
+define('ember-on-fhir/components/add-intervention-modal/intervention-detail', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Component.extend({
+    classNames: ['intervention-list-group-item'],
+    classNameBindings: ['_active:active'],
+
+    _registeredParent: null,
+    _active: false,
+
+    intervention: null,
+    detail: '',
+
+    init: function init() {
+      this._super.apply(this, arguments);
+      _ember['default'].run.scheduleOnce('actions', this, this._registerWithParent);
+    },
+
+    click: function click() {
+      this.attrs.expand(this);
+    },
+
+    slideUp: function slideUp() {
+      this.$('.collapsible-panel').slideUp();
+      this.set('_active', false);
+    },
+
+    slideDown: function slideDown() {
+      this.$('.collapsible-panel').slideDown();
+      this.set('_active', true);
+    },
+
+    _registerWithParent: function _registerWithParent() {
+      this.attrs.registerDetailItem(this);
+    }
+  });
+});
 define('ember-on-fhir/components/add-to-huddle-modal', ['exports', 'ember-component', 'ember-computed', 'ember-service/inject', 'ember-runloop', 'moment', 'ember-on-fhir/mixins/has-stylesheet', 'ember-on-fhir/models/huddle', 'ember-on-fhir/models/huddle-patient', 'ember-on-fhir/utils/create-stylesheet'], function (exports, _emberComponent, _emberComputed, _emberServiceInject, _emberRunloop, _moment, _emberOnFhirMixinsHasStylesheet, _emberOnFhirModelsHuddle, _emberOnFhirModelsHuddlePatient, _emberOnFhirUtilsCreateStylesheet) {
   exports['default'] = _emberComponent['default'].extend(_emberOnFhirMixinsHasStylesheet['default'], {
     ajax: (0, _emberServiceInject['default'])(),
@@ -218,11 +218,13 @@ define('ember-on-fhir/components/add-to-huddle-modal', ['exports', 'ember-compon
     huddle: null,
     huddles: null,
     patientHuddles: null, // master huddle list from the patient viewer controller
+
     huddleDate: (0, _emberComputed['default'])('defaultDate', {
       get: function get() {
         return this.get('defaultDate') || new Date();
       }
     }),
+
     huddleLeader: (0, _emberComputed['default'])('huddle.displayLeader', {
       get: function get() {
         var huddle = this.get('huddle');
@@ -232,6 +234,7 @@ define('ember-on-fhir/components/add-to-huddle-modal', ['exports', 'ember-compon
         return '';
       }
     }),
+
     huddleReasonText: (0, _emberComputed['default'])('huddle', {
       get: function get() {
         var huddle = this.get('huddle');
@@ -241,9 +244,11 @@ define('ember-on-fhir/components/add-to-huddle-modal', ['exports', 'ember-compon
         return '';
       }
     }),
+
     patient: null,
     isLoading: true,
     huddleLeaderDisabled: _emberComputed['default'].notEmpty('existingHuddle'),
+
     huddleReasonTextDisabled: (0, _emberComputed['default'])('patientInExistingHuddle', {
       get: function get() {
         if (this.get('patientInExistingHuddle')) {
@@ -254,7 +259,9 @@ define('ember-on-fhir/components/add-to-huddle-modal', ['exports', 'ember-compon
         return false;
       }
     }),
+
     formSaving: false,
+
     saveBtnDisabled: (0, _emberComputed['default'])('formSaving', 'patientInExistingHuddle', 'huddleReasonText', {
       get: function get() {
         if (this.get('formSaving')) {
@@ -273,6 +280,7 @@ define('ember-on-fhir/components/add-to-huddle-modal', ['exports', 'ember-compon
         return false;
       }
     }),
+
     removeBtnDisabled: _emberComputed['default'].alias('formSaving'),
 
     title: (0, _emberComputed['default'])('huddle', {
@@ -338,7 +346,6 @@ define('ember-on-fhir/components/add-to-huddle-modal', ['exports', 'ember-compon
 
       for (var i = 0; i < huddles.length; i++) {
         var date = (0, _moment['default'])(huddles[i].get('date'));
-
         var year = date.year();
         var month = date.month();
         var day = date.date();
@@ -387,6 +394,7 @@ define('ember-on-fhir/components/add-to-huddle-modal', ['exports', 'ember-compon
             leader: 'Practitioner/' + this.get('huddleLeader'),
             name: (0, _moment['default'])(this.get('huddleDate')).format('MMMM D, YYYY') // TODO: change this
           });
+
           newHuddle = true;
         }
 
@@ -1377,7 +1385,7 @@ define('ember-on-fhir/components/huddle-reason-icon', ['exports', 'ember-compone
     reasonIconClass: (0, _emberComputed['default'])('huddlePatient.reason', {
       get: function get() {
         switch (this.get('huddlePatient.reason')) {
-          case _emberOnFhirModelsHuddlePatient.REASON_CODES.CARRYOVER:
+          case _emberOnFhirModelsHuddlePatient.REASON_CODES.ROLL_OVER:
             return 'fa fa-fw fa-arrow-circle-o-right';
           case _emberOnFhirModelsHuddlePatient.REASON_CODES.MANUAL_ADDITION:
             return 'fa fa-fw fa-pencil';
@@ -2377,6 +2385,11 @@ define('ember-on-fhir/components/review-patient-modal', ['exports', 'ember-compo
 
     huddle: null,
     patient: null,
+    skippable: false,
+
+    modalTitle: (0, _emberComputed['default'])('skippable', function modalTitle() {
+      return 'Mark Patient as Discussed' + (this.get('skippable') ? '?' : '');
+    }),
 
     huddlePatient: (0, _emberComputed['default'])('huddle', 'patient', {
       get: function get() {
@@ -2407,7 +2420,11 @@ define('ember-on-fhir/components/review-patient-modal', ['exports', 'ember-compo
         });
 
         promise.then(function () {
-          return _this.attrs.onClose();
+          if (_this.get('skippable')) {
+            _this.attrs.onSkip();
+          } else {
+            _this.attrs.onClose();
+          }
         });
         promise['catch'](function () {
           _this.get('huddlePatient').set('reviewed', null);
@@ -2837,11 +2854,15 @@ define('ember-on-fhir/controllers/patients/index', ['exports', 'ember-controller
 
       (0, _emberRunloop['default'])(function () {
         _this.set('page', 1);
+        var groupIds = [_this.get('huddleId'), _this.get('groupId')].filter(function (n) {
+          return n;
+        });
+
         var patientsRemoteArray = _this.get('model.patients');
         patientsRemoteArray.set('sortBy', _this.get('sortBy'));
         patientsRemoteArray.set('sortDescending', _this.get('sortDescending'));
-        patientsRemoteArray.set('groupId', _this.get('groupId'));
-        patientsRemoteArray.set('patientIds', _this.get('huddlePatientIds'));
+        patientsRemoteArray.set('groupId', groupIds);
+        // patientsRemoteArray.set('patientIds', this.get('huddlePatientIds'));
         patientsRemoteArray.set('patientSearch', _this.get('patientSearch'));
         patientsRemoteArray.set('page', 1);
         patientsRemoteArray.pageChanged();
@@ -2921,7 +2942,7 @@ define('ember-on-fhir/controllers/patients/index', ['exports', 'ember-controller
         }
 
         var url = this.get('router.router').generate('patients.print', { queryParams: queryParams });
-        window.open(url, 'patientPrintList', 'menubar=no,toolbar=no,location=no,status=yes,width=200');
+        window.open(url, 'patientPrintList', 'menubar=no,toolbar=no,location=no,status=yes,resizable=yes,scrollbars=yes');
       }
     }
   });
@@ -2995,6 +3016,7 @@ define('ember-on-fhir/controllers/patients/show', ['exports', 'ember-controller'
     showAddInterventionModal: false,
     showAddHuddleModal: false,
     showReviewPatientModal: false,
+    reviewPatientModalSkippable: false,
     defaultAddHuddleDate: null,
 
     patientViewerComponent: null,
@@ -3050,6 +3072,54 @@ define('ember-on-fhir/controllers/patients/show', ['exports', 'ember-controller'
     },
 
     actions: {
+      moveToNextPatient: function moveToNextPatient() {
+        var _this2 = this;
+
+        var skip = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+        var newIndex = this.get('currentPatientIndex') + 1;
+        if (newIndex > this.get('huddleCount')) {
+          return;
+        }
+
+        var selectedHuddleId = this.get('indexController.selectedHuddle.id');
+        var selectedHuddle = selectedHuddleId ? this.get('huddles').findBy('id', selectedHuddleId) : null;
+        var patientReviewed = true;
+        if (selectedHuddle != null) {
+          patientReviewed = selectedHuddle.patientReviewed(this.get('model'));
+        }
+
+        if (!skip && !patientReviewed) {
+          this.set('reviewPatientModalSkippable', true);
+          this.set('showReviewPatientModal', true);
+          this.set('reviewPatientHuddle', selectedHuddle);
+
+          return;
+        }
+
+        this.set('reviewPatientModalSkippable', false);
+        this.set('showReviewPatientModal', false);
+
+        this.get('nextPatient').then(function (nextPatient) {
+          _this2.set('currentPatientIndex', newIndex);
+          _this2.transitionToRoute('patients.show', nextPatient.get('firstObject'));
+        });
+      },
+
+      moveToPrevPatient: function moveToPrevPatient() {
+        var _this3 = this;
+
+        var newIndex = this.get('currentPatientIndex') - 1;
+        if (newIndex <= 0) {
+          return;
+        }
+
+        this.get('prevPatient').then(function (prevPatient) {
+          _this3.set('currentPatientIndex', newIndex);
+          _this3.transitionToRoute('patients.show', prevPatient.get('firstObject'));
+        });
+      },
+
       changeCurrentPatientIndex: function changeCurrentPatientIndex(amount) {
         var newIndex = this.get('currentPatientIndex') + amount;
         if (newIndex > this.get('huddleCount') || newIndex <= 0) {
@@ -3096,6 +3166,7 @@ define('ember-on-fhir/controllers/patients/show', ['exports', 'ember-controller'
 
       hideReviewPatientModal: function hideReviewPatientModal() {
         this.set('showReviewPatientModal', false);
+        this.set('reviewPatientModalSkippable', false);
         var patientViewer = this.get('patientViewerComponent');
         if (patientViewer) {
           patientViewer.notifyPropertyChange('nextScheduledHuddle');
@@ -4652,7 +4723,7 @@ define('ember-on-fhir/models/healthcare-service', ['exports', 'ember-fhir-adapte
 //Autogenerated by ../../build_app.js
 define('ember-on-fhir/models/huddle-patient', ['exports', 'ember-object', 'ember-computed', 'ember-utils', 'moment'], function (exports, _emberObject, _emberComputed, _emberUtils, _moment) {
   var REASON_CODES = {
-    CARRYOVER: 'CARRYOVER',
+    ROLL_OVER: 'ROLL_OVER',
     MANUAL_ADDITION: 'MANUAL_ADDITION',
     RECENT_ENCOUNTER: 'RECENT_ENCOUNTER',
     RISK_SCORE: 'RISK_SCORE'
@@ -5923,9 +5994,9 @@ define('ember-on-fhir/routes/login', ['exports', 'ember-route', 'ember-simple-au
     }
   });
 });
-define('ember-on-fhir/routes/patients/index', ['exports', 'ember', 'ember-route', 'ember-service/inject', 'ember-metal/get', 'ember-simple-auth/mixins/authenticated-route-mixin', 'ember-cli-pagination/remote/route-mixin', 'ember-on-fhir/utils/fhir-paged-remote-array', 'ember-on-fhir/models/huddle'], function (exports, _ember, _emberRoute, _emberServiceInject, _emberMetalGet, _emberSimpleAuthMixinsAuthenticatedRouteMixin, _emberCliPaginationRemoteRouteMixin, _emberOnFhirUtilsFhirPagedRemoteArray, _emberOnFhirModelsHuddle) {
+define('ember-on-fhir/routes/patients/index', ['exports', 'ember', 'ember-route', 'ember-service/inject', 'ember-simple-auth/mixins/unauthenticated-route-mixin', 'ember-cli-pagination/remote/route-mixin', 'ember-on-fhir/utils/fhir-paged-remote-array', 'ember-on-fhir/models/huddle'], function (exports, _ember, _emberRoute, _emberServiceInject, _emberSimpleAuthMixinsUnauthenticatedRouteMixin, _emberCliPaginationRemoteRouteMixin, _emberOnFhirUtilsFhirPagedRemoteArray, _emberOnFhirModelsHuddle) {
   var RSVP = _ember['default'].RSVP;
-  exports['default'] = _emberRoute['default'].extend(_emberSimpleAuthMixinsAuthenticatedRouteMixin['default'], _emberCliPaginationRemoteRouteMixin['default'], {
+  exports['default'] = _emberRoute['default'].extend(_emberSimpleAuthMixinsUnauthenticatedRouteMixin['default'], _emberCliPaginationRemoteRouteMixin['default'], {
     store: (0, _emberServiceInject['default'])(),
     ajax: (0, _emberServiceInject['default'])(),
 
@@ -5938,19 +6009,8 @@ define('ember-on-fhir/routes/patients/index', ['exports', 'ember', 'ember-route'
         // Ember controllers are singletons, this means when we overwrite the computed property we lose being able to compute it.
         // If we have the controller set up when we activate THIS route we want to reset that computed property.
         controller.set('currentPatientIndex', _ember['default'].computed('huddlePatients', 'model', function () {
-          return this.get('huddlePatients').indexOf(this.get('model')) + 1 + this.get('huddleOffset');
+          return controller.get('huddlePatients').indexOf(controller.get('model')) + 1 + controller.get('huddleOffset');
         }));
-      }
-    },
-
-    beforeModel: function beforeModel(transition) {
-      var _this = this;
-
-      var huddleId = (0, _emberMetalGet['default'])(transition, 'queryParams.huddleId');
-      if (huddleId) {
-        return this.get('ajax').request('/Group/' + huddleId).then(function (response) {
-          _this.set('huddle', (0, _emberOnFhirModelsHuddle.parseHuddles)(response));
-        });
       }
     },
 
@@ -5962,12 +6022,11 @@ define('ember-on-fhir/routes/patients/index', ['exports', 'ember', 'ember-route'
 
       var store = this.get('store');
       var perPage = this.get('perPage');
-      var patientIds = [];
+      var groupIds = [params.huddleId, params.groupId].filter(function (n) {
+        return n;
+      });
 
-      if (params.huddleId) {
-        patientIds = this.get('huddle.patients').mapBy('patientId');
-      }
-
+      _ember['default'].$.ajaxSetup({ traditional: true });
       return RSVP.hash({
         // patients: store.findAll('patient'),
         patients: _emberOnFhirUtilsFhirPagedRemoteArray['default'].create({
@@ -5978,10 +6037,9 @@ define('ember-on-fhir/routes/patients/index', ['exports', 'ember', 'ember-route'
           paramMapping: paramMapping,
           sortBy: params.sortBy || 'family',
           sortDescending: params.sortDescending,
-          groupId: params.groupId,
-          patientIds: patientIds
+          groupId: groupIds
         }),
-        groups: store.findAll('group'),
+        groups: store.query('group', { actual: false }),
         huddles: this.get('ajax').request('/Group', { data: { code: 'http://interventionengine.org/fhir/cs/huddle|HUDDLE' } }).then(function (response) {
           return (0, _emberOnFhirModelsHuddle.parseHuddles)(response.entry || []);
         })
@@ -6022,19 +6080,34 @@ define('ember-on-fhir/routes/patients/print', ['exports', 'ember', 'ember-route'
     },
 
     model: function model(params) {
+      var _this2 = this;
+
       var hash = {
         patients: this.get('store').query('patient', patientParams(params, this.get('huddle'))),
         huddles: this.get('ajax').request('/Group', { data: { code: 'http://interventionengine.org/fhir/cs/huddle|HUDDLE' } }).then(function (response) {
           return (0, _emberOnFhirModelsHuddle.parseHuddles)(response.entry || []);
-        }),
-        risks: this.get('store').query('risk-assessment', { _tag: 'MOST_RECENT', method: methodFromAssessment(params.assessment) })
+        })
       };
 
       if (params.groupId) {
         hash.group = this.get('store').find('group', params.groupId);
       }
 
-      return RSVP.hash(hash);
+      return new RSVP.Promise(function (resolve) {
+        RSVP.hash(hash).then(function (response) {
+          var patientIds = response.patients.mapBy('id');
+          var riskParams = {
+            _count: patientIds.length,
+            method: 'http://interventionengine.org/risk-assessments|' + methodFromAssessment(params.assessment),
+            _tag: 'http://interventionengine.org/tags/|MOST_RECENT',
+            'subject:Patient': patientIds.join(',')
+          };
+
+          _this2.get('store').query('risk-assessment', riskParams).then(function (risks) {
+            resolve(Object.assign({ risks: risks }, response));
+          });
+        });
+      });
     }
   });
 
@@ -7494,101 +7567,6 @@ define("ember-on-fhir/templates/application", ["exports"], function (exports) {
     };
   })());
 });
-define("ember-on-fhir/templates/components/add-intervention-modal/intervention-detail", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    return {
-      meta: {
-        "fragmentReason": {
-          "name": "missing-wrapper",
-          "problems": ["multiple-nodes"]
-        },
-        "revision": "Ember@2.3.0",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 14,
-            "column": 6
-          }
-        },
-        "moduleName": "ember-on-fhir/templates/components/add-intervention-modal/intervention-detail.hbs"
-      },
-      isEmpty: false,
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("header");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "pull-right");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("i");
-        dom.setAttribute(el3, "class", "fa fa-fw fa-check-circle text-muted");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "intervention-icon");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("i");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "intervention-name");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createComment("");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "class", "collapsible-panel");
-        dom.setAttribute(el1, "style", "display:none;");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0]);
-        var element1 = dom.childAt(element0, [3, 1]);
-        var morphs = new Array(3);
-        morphs[0] = dom.createAttrMorph(element1, 'class');
-        morphs[1] = dom.createMorphAt(dom.childAt(element0, [5]), 1, 1);
-        morphs[2] = dom.createMorphAt(dom.childAt(fragment, [2]), 1, 1);
-        return morphs;
-      },
-      statements: [["attribute", "class", ["concat", [["get", "intervention.iconClassnames", ["loc", [null, [6, 16], [6, 43]]]], " fa-fw"]]], ["content", "intervention.name", ["loc", [null, [9, 4], [9, 25]]]], ["inline", "textarea", [], ["value", ["subexpr", "@mut", [["get", "detail", ["loc", [null, [13, 19], [13, 25]]]]], [], []], "placeholder", "Optional description..."], ["loc", [null, [13, 2], [13, 65]]]]],
-      locals: [],
-      templates: []
-    };
-  })());
-});
 define("ember-on-fhir/templates/components/add-intervention-modal", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -7754,6 +7732,101 @@ define("ember-on-fhir/templates/components/add-intervention-modal", ["exports"],
       statements: [["block", "bootstrap-modal", [], ["title", "Add Intervention", "onOpen", ["subexpr", "@mut", [["get", "attrs.onOpen", ["loc", [null, [1, 51], [1, 63]]]]], [], []], "onClose", ["subexpr", "@mut", [["get", "attrs.onClose", ["loc", [null, [1, 72], [1, 85]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [14, 20]]]]],
       locals: [],
       templates: [child0]
+    };
+  })());
+});
+define("ember-on-fhir/templates/components/add-intervention-modal/intervention-detail", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["multiple-nodes"]
+        },
+        "revision": "Ember@2.3.0",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 14,
+            "column": 6
+          }
+        },
+        "moduleName": "ember-on-fhir/templates/components/add-intervention-modal/intervention-detail.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("header");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "pull-right");
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("i");
+        dom.setAttribute(el3, "class", "fa fa-fw fa-check-circle text-muted");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "intervention-icon");
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("i");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "intervention-name");
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "collapsible-panel");
+        dom.setAttribute(el1, "style", "display:none;");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [0]);
+        var element1 = dom.childAt(element0, [3, 1]);
+        var morphs = new Array(3);
+        morphs[0] = dom.createAttrMorph(element1, 'class');
+        morphs[1] = dom.createMorphAt(dom.childAt(element0, [5]), 1, 1);
+        morphs[2] = dom.createMorphAt(dom.childAt(fragment, [2]), 1, 1);
+        return morphs;
+      },
+      statements: [["attribute", "class", ["concat", [["get", "intervention.iconClassnames", ["loc", [null, [6, 16], [6, 43]]]], " fa-fw"]]], ["content", "intervention.name", ["loc", [null, [9, 4], [9, 25]]]], ["inline", "textarea", [], ["value", ["subexpr", "@mut", [["get", "detail", ["loc", [null, [13, 19], [13, 25]]]]], [], []], "placeholder", "Optional description..."], ["loc", [null, [13, 2], [13, 65]]]]],
+      locals: [],
+      templates: []
     };
   })());
 });
@@ -7975,6 +8048,84 @@ define("ember-on-fhir/templates/components/add-to-huddle-modal", ["exports"], fu
             templates: []
           };
         })();
+        var child3 = (function () {
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.3.0",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 83,
+                  "column": 10
+                },
+                "end": {
+                  "line": 85,
+                  "column": 10
+                }
+              },
+              "moduleName": "ember-on-fhir/templates/components/add-to-huddle-modal.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createComment("");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+              var morphs = new Array(1);
+              morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+              return morphs;
+            },
+            statements: [["inline", "ember-spinner", [], ["config", "small", "color", "#fff"], ["loc", [null, [84, 12], [84, 57]]]]],
+            locals: [],
+            templates: []
+          };
+        })();
+        var child4 = (function () {
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.3.0",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 85,
+                  "column": 10
+                },
+                "end": {
+                  "line": 87,
+                  "column": 10
+                }
+              },
+              "moduleName": "ember-on-fhir/templates/components/add-to-huddle-modal.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("            Save\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
         return {
           meta: {
             "fragmentReason": false,
@@ -7986,7 +8137,7 @@ define("ember-on-fhir/templates/components/add-to-huddle-modal", ["exports"], fu
                 "column": 2
               },
               "end": {
-                "line": 85,
+                "line": 91,
                 "column": 2
               }
             },
@@ -8120,7 +8271,11 @@ define("ember-on-fhir/templates/components/add-to-huddle-modal", ["exports"], fu
             var el3 = dom.createElement("button");
             dom.setAttribute(el3, "type", "submit");
             dom.setAttribute(el3, "class", "btn btn-primary");
-            var el4 = dom.createTextNode("Save");
+            var el4 = dom.createTextNode("\n");
+            dom.appendChild(el3, el4);
+            var el4 = dom.createComment("");
+            dom.appendChild(el3, el4);
+            var el4 = dom.createTextNode("        ");
             dom.appendChild(el3, el4);
             dom.appendChild(el2, el3);
             var el3 = dom.createTextNode("\n      ");
@@ -8139,7 +8294,7 @@ define("ember-on-fhir/templates/components/add-to-huddle-modal", ["exports"], fu
             var element3 = dom.childAt(element2, [1]);
             var element4 = dom.childAt(element1, [3]);
             var element5 = dom.childAt(element4, [3]);
-            var morphs = new Array(7);
+            var morphs = new Array(8);
             morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
             morphs[1] = dom.createAttrMorph(element1, 'onsubmit');
             morphs[2] = dom.createMorphAt(element3, 1, 1);
@@ -8147,12 +8302,13 @@ define("ember-on-fhir/templates/components/add-to-huddle-modal", ["exports"], fu
             morphs[4] = dom.createMorphAt(dom.childAt(element2, [4, 1, 3]), 1, 1);
             morphs[5] = dom.createMorphAt(element4, 1, 1);
             morphs[6] = dom.createAttrMorph(element5, 'disabled');
+            morphs[7] = dom.createMorphAt(element5, 1, 1);
             dom.insertBoundary(fragment, 0);
             return morphs;
           },
-          statements: [["block", "if", [["subexpr", "and", [["get", "patientInExistingHuddle", ["loc", [null, [7, 15], [7, 38]]]], ["subexpr", "not-eq", [["get", "huddle.id", ["loc", [null, [7, 47], [7, 56]]]], ["get", "existingHuddle.id", ["loc", [null, [7, 57], [7, 74]]]]], [], ["loc", [null, [7, 39], [7, 75]]]]], [], ["loc", [null, [7, 10], [7, 76]]]]], [], 0, null, ["loc", [null, [7, 4], [12, 11]]]], ["attribute", "onsubmit", ["subexpr", "action", ["save"], [], ["loc", [null, [14, 19], [14, 36]]]]], ["block", "if", [["get", "huddle", ["loc", [null, [17, 16], [17, 22]]]]], [], 1, null, ["loc", [null, [17, 10], [26, 17]]]], ["inline", "pikaday-input", [], ["id", "huddleDate", "class", "form-control form-input-calendar", "value", ["subexpr", "@mut", [["get", "huddleDate", ["loc", [null, [38, 24], [38, 34]]]]], [], []], "format", "dddd, MMMM Do YYYY", "theme", ["subexpr", "concat", [["get", "elementId", ["loc", [null, [40, 32], [40, 41]]]], "-pikaday"], [], ["loc", [null, [40, 24], [40, 53]]]], "firstDay", 0], ["loc", [null, [35, 16], [41, 30]]]], ["inline", "textarea", [], ["elementId", "huddleReason", "rows", 3, "value", ["subexpr", "@mut", [["get", "huddleReasonText", ["loc", [null, [72, 63], [72, 79]]]]], [], []], "disabled", ["subexpr", "@mut", [["get", "huddleReasonTextDisabled", ["loc", [null, [72, 89], [72, 113]]]]], [], []]], ["loc", [null, [72, 14], [72, 115]]]], ["block", "if", [["get", "huddle", ["loc", [null, [79, 14], [79, 20]]]]], [], 2, null, ["loc", [null, [79, 8], [81, 15]]]], ["attribute", "disabled", ["get", "saveBtnDisabled", ["loc", [null, [82, 65], [82, 80]]]]]],
+          statements: [["block", "if", [["subexpr", "and", [["get", "patientInExistingHuddle", ["loc", [null, [7, 15], [7, 38]]]], ["subexpr", "not-eq", [["get", "huddle.id", ["loc", [null, [7, 47], [7, 56]]]], ["get", "existingHuddle.id", ["loc", [null, [7, 57], [7, 74]]]]], [], ["loc", [null, [7, 39], [7, 75]]]]], [], ["loc", [null, [7, 10], [7, 76]]]]], [], 0, null, ["loc", [null, [7, 4], [12, 11]]]], ["attribute", "onsubmit", ["subexpr", "action", ["save"], [], ["loc", [null, [14, 19], [14, 36]]]]], ["block", "if", [["get", "huddle", ["loc", [null, [17, 16], [17, 22]]]]], [], 1, null, ["loc", [null, [17, 10], [26, 17]]]], ["inline", "pikaday-input", [], ["id", "huddleDate", "class", "form-control form-input-calendar", "value", ["subexpr", "@mut", [["get", "huddleDate", ["loc", [null, [38, 24], [38, 34]]]]], [], []], "format", "dddd, MMMM Do YYYY", "theme", ["subexpr", "concat", [["get", "elementId", ["loc", [null, [40, 32], [40, 41]]]], "-pikaday"], [], ["loc", [null, [40, 24], [40, 53]]]], "firstDay", 0], ["loc", [null, [35, 16], [41, 30]]]], ["inline", "textarea", [], ["elementId", "huddleReason", "rows", 3, "value", ["subexpr", "@mut", [["get", "huddleReasonText", ["loc", [null, [72, 63], [72, 79]]]]], [], []], "disabled", ["subexpr", "@mut", [["get", "huddleReasonTextDisabled", ["loc", [null, [72, 89], [72, 113]]]]], [], []]], ["loc", [null, [72, 14], [72, 115]]]], ["block", "if", [["get", "huddle", ["loc", [null, [79, 14], [79, 20]]]]], [], 2, null, ["loc", [null, [79, 8], [81, 15]]]], ["attribute", "disabled", ["get", "saveBtnDisabled", ["loc", [null, [82, 65], [82, 80]]]]], ["block", "if", [["get", "formSaving", ["loc", [null, [83, 16], [83, 26]]]]], [], 3, 4, ["loc", [null, [83, 10], [87, 17]]]]],
           locals: [],
-          templates: [child0, child1, child2]
+          templates: [child0, child1, child2, child3, child4]
         };
       })();
       return {
@@ -8169,7 +8325,7 @@ define("ember-on-fhir/templates/components/add-to-huddle-modal", ["exports"], fu
               "column": 0
             },
             "end": {
-              "line": 86,
+              "line": 92,
               "column": 0
             }
           },
@@ -8192,7 +8348,7 @@ define("ember-on-fhir/templates/components/add-to-huddle-modal", ["exports"], fu
           dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["block", "if", [["get", "isLoading", ["loc", [null, [2, 8], [2, 17]]]]], [], 0, 1, ["loc", [null, [2, 2], [85, 9]]]]],
+        statements: [["block", "if", [["get", "isLoading", ["loc", [null, [2, 8], [2, 17]]]]], [], 0, 1, ["loc", [null, [2, 2], [91, 9]]]]],
         locals: [],
         templates: [child0, child1]
       };
@@ -8211,8 +8367,8 @@ define("ember-on-fhir/templates/components/add-to-huddle-modal", ["exports"], fu
             "column": 0
           },
           "end": {
-            "line": 86,
-            "column": 20
+            "line": 93,
+            "column": 0
           }
         },
         "moduleName": "ember-on-fhir/templates/components/add-to-huddle-modal.hbs"
@@ -8234,7 +8390,7 @@ define("ember-on-fhir/templates/components/add-to-huddle-modal", ["exports"], fu
         dom.insertBoundary(fragment, null);
         return morphs;
       },
-      statements: [["block", "bootstrap-modal", [], ["title", ["subexpr", "@mut", [["get", "title", ["loc", [null, [1, 25], [1, 30]]]]], [], []], "onOpen", ["subexpr", "@mut", [["get", "attrs.onOpen", ["loc", [null, [1, 38], [1, 50]]]]], [], []], "onClose", ["subexpr", "@mut", [["get", "attrs.onClose", ["loc", [null, [1, 59], [1, 72]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [86, 20]]]]],
+      statements: [["block", "bootstrap-modal", [], ["title", ["subexpr", "@mut", [["get", "title", ["loc", [null, [1, 25], [1, 30]]]]], [], []], "onOpen", ["subexpr", "@mut", [["get", "attrs.onOpen", ["loc", [null, [1, 38], [1, 50]]]]], [], []], "onClose", ["subexpr", "@mut", [["get", "attrs.onClose", ["loc", [null, [1, 59], [1, 72]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [92, 20]]]]],
       locals: [],
       templates: [child0]
     };
@@ -10142,7 +10298,14 @@ define("ember-on-fhir/templates/components/filter-builder", ["exports"], functio
           var el3 = dom.createTextNode("\n              ");
           dom.appendChild(el2, el3);
           dom.appendChild(el1, el2);
-          var el2 = dom.createTextNode("\n              Age\n              ");
+          var el2 = dom.createTextNode("\n              ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("div");
+          dom.setAttribute(el2, "class", "filter-type-name");
+          var el3 = dom.createTextNode("Age");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n              ");
           dom.appendChild(el1, el2);
           var el2 = dom.createElement("i");
           dom.setAttribute(el2, "class", "fa fa-chevron-right filter-type-chevron");
@@ -10204,7 +10367,14 @@ define("ember-on-fhir/templates/components/filter-builder", ["exports"], functio
           var el3 = dom.createTextNode("\n              ");
           dom.appendChild(el2, el3);
           dom.appendChild(el1, el2);
-          var el2 = dom.createTextNode("\n              Gender\n              ");
+          var el2 = dom.createTextNode("\n              ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("div");
+          dom.setAttribute(el2, "class", "filter-type-name");
+          var el3 = dom.createTextNode("Gender");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n              ");
           dom.appendChild(el1, el2);
           var el2 = dom.createElement("i");
           dom.setAttribute(el2, "class", "fa fa-chevron-right filter-type-chevron");
@@ -10267,7 +10437,14 @@ define("ember-on-fhir/templates/components/filter-builder", ["exports"], functio
           var el3 = dom.createTextNode("\n              ");
           dom.appendChild(el2, el3);
           dom.appendChild(el1, el2);
-          var el2 = dom.createTextNode("\n              Condition\n              ");
+          var el2 = dom.createTextNode("\n              ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("div");
+          dom.setAttribute(el2, "class", "filter-type-name");
+          var el3 = dom.createTextNode("Condition");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n              ");
           dom.appendChild(el1, el2);
           var el2 = dom.createElement("i");
           dom.setAttribute(el2, "class", "fa fa-chevron-right filter-type-chevron");
@@ -10327,7 +10504,14 @@ define("ember-on-fhir/templates/components/filter-builder", ["exports"], functio
           var el3 = dom.createTextNode("\n              ");
           dom.appendChild(el2, el3);
           dom.appendChild(el1, el2);
-          var el2 = dom.createTextNode("\n              Encounter\n              ");
+          var el2 = dom.createTextNode("\n              ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("div");
+          dom.setAttribute(el2, "class", "filter-type-name");
+          var el3 = dom.createTextNode("Encounter");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n              ");
           dom.appendChild(el1, el2);
           var el2 = dom.createElement("i");
           dom.setAttribute(el2, "class", "fa fa-chevron-right filter-type-chevron");
@@ -10423,7 +10607,7 @@ define("ember-on-fhir/templates/components/filter-builder", ["exports"], functio
             var el2 = dom.createTextNode("\n                ");
             dom.appendChild(el1, el2);
             var el2 = dom.createElement("div");
-            dom.setAttribute(el2, "class", "pane-input");
+            dom.setAttribute(el2, "class", "pane-input col-sm-8");
             var el3 = dom.createTextNode("\n                  ");
             dom.appendChild(el2, el3);
             var el3 = dom.createComment("");
@@ -10434,7 +10618,7 @@ define("ember-on-fhir/templates/components/filter-builder", ["exports"], functio
             var el2 = dom.createTextNode("\n\n                ");
             dom.appendChild(el1, el2);
             var el2 = dom.createElement("div");
-            dom.setAttribute(el2, "class", "col-sm-12");
+            dom.setAttribute(el2, "class", "col-sm-4");
             var el3 = dom.createTextNode("\n                  ");
             dom.appendChild(el2, el3);
             var el3 = dom.createElement("button");
@@ -11631,7 +11815,7 @@ define("ember-on-fhir/templates/components/ie-navbar", ["exports"], function (ex
           dom.appendChild(el0, el1);
           var el1 = dom.createElement("img");
           dom.setAttribute(el1, "class", "logo");
-          dom.setAttribute(el1, "src", "/assets/images/logo.png");
+          dom.setAttribute(el1, "src", "/assets/images/logo-3x.png");
           dom.setAttribute(el1, "alt", "Intervention Engine");
           dom.appendChild(el0, el1);
           var el1 = dom.createTextNode("\n");
@@ -13877,7 +14061,7 @@ define("ember-on-fhir/templates/components/patient-search/population-filter", ["
             var el2 = dom.createTextNode("\n              ");
             dom.appendChild(el1, el2);
             var el2 = dom.createElement("label");
-            dom.setAttribute(el2, "class", "css-label css-label-box checkbox-label");
+            dom.setAttribute(el2, "class", "css-label css-label-circle checkbox-label");
             var el3 = dom.createTextNode("\n                ");
             dom.appendChild(el2, el3);
             var el3 = dom.createComment("");
@@ -17102,6 +17286,54 @@ define("ember-on-fhir/templates/components/remove-discussed-patient-modal", ["ex
 define("ember-on-fhir/templates/components/review-patient-modal", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.3.0",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 74,
+                "column": 6
+              },
+              "end": {
+                "line": 76,
+                "column": 6
+              }
+            },
+            "moduleName": "ember-on-fhir/templates/components/review-patient-modal.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("        ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("button");
+            dom.setAttribute(el1, "type", "button");
+            dom.setAttribute(el1, "class", "btn btn-secondary");
+            var el2 = dom.createTextNode("Skip");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element0 = dom.childAt(fragment, [1]);
+            var morphs = new Array(2);
+            morphs[0] = dom.createAttrMorph(element0, 'disabled');
+            morphs[1] = dom.createAttrMorph(element0, 'onclick');
+            return morphs;
+          },
+          statements: [["attribute", "disabled", ["get", "saveBtnDisabled", ["loc", [null, [75, 67], [75, 82]]]]], ["attribute", "onclick", ["subexpr", "action", [["get", "this.attrs.onSkip", ["loc", [null, [75, 102], [75, 119]]]]], [], ["loc", [null, [75, 93], [75, 121]]]]]],
+          locals: [],
+          templates: []
+        };
+      })();
       return {
         meta: {
           "fragmentReason": false,
@@ -17113,7 +17345,7 @@ define("ember-on-fhir/templates/components/review-patient-modal", ["exports"], f
               "column": 0
             },
             "end": {
-              "line": 77,
+              "line": 80,
               "column": 0
             }
           },
@@ -17302,7 +17534,11 @@ define("ember-on-fhir/templates/components/review-patient-modal", ["exports"], f
           dom.appendChild(el1, el2);
           var el2 = dom.createElement("div");
           dom.setAttribute(el2, "class", "modal-footer");
-          var el3 = dom.createTextNode("\n      ");
+          var el3 = dom.createTextNode("\n");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("      ");
           dom.appendChild(el2, el3);
           var el3 = dom.createElement("button");
           dom.setAttribute(el3, "type", "submit");
@@ -17321,20 +17557,22 @@ define("ember-on-fhir/templates/components/review-patient-modal", ["exports"], f
           return el0;
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var element0 = dom.childAt(fragment, [1]);
-          var element1 = dom.childAt(element0, [1]);
-          var element2 = dom.childAt(element0, [3, 1]);
-          var morphs = new Array(5);
-          morphs[0] = dom.createAttrMorph(element0, 'onsubmit');
-          morphs[1] = dom.createMorphAt(dom.childAt(element1, [1, 1, 3]), 1, 1);
-          morphs[2] = dom.createMorphAt(dom.childAt(element1, [5, 1, 3]), 1, 1);
-          morphs[3] = dom.createMorphAt(dom.childAt(element1, [8, 1, 3, 1]), 3, 3);
-          morphs[4] = dom.createAttrMorph(element2, 'disabled');
+          var element1 = dom.childAt(fragment, [1]);
+          var element2 = dom.childAt(element1, [1]);
+          var element3 = dom.childAt(element1, [3]);
+          var element4 = dom.childAt(element3, [3]);
+          var morphs = new Array(6);
+          morphs[0] = dom.createAttrMorph(element1, 'onsubmit');
+          morphs[1] = dom.createMorphAt(dom.childAt(element2, [1, 1, 3]), 1, 1);
+          morphs[2] = dom.createMorphAt(dom.childAt(element2, [5, 1, 3]), 1, 1);
+          morphs[3] = dom.createMorphAt(dom.childAt(element2, [8, 1, 3, 1]), 3, 3);
+          morphs[4] = dom.createMorphAt(element3, 1, 1);
+          morphs[5] = dom.createAttrMorph(element4, 'disabled');
           return morphs;
         },
-        statements: [["attribute", "onsubmit", ["subexpr", "action", ["save"], [], ["loc", [null, [2, 17], [2, 34]]]]], ["content", "patient.fullName", ["loc", [null, [11, 12], [11, 32]]]], ["inline", "moment-format", [["get", "huddle.date", ["loc", [null, [35, 28], [35, 39]]]], "MMM DD, YYYY"], [], ["loc", [null, [35, 12], [35, 56]]]], ["inline", "pikaday-input", [], ["id", "reviewDate", "class", "form-control form-input-calendar", "value", ["subexpr", "@mut", [["get", "reviewDate", ["loc", [null, [64, 22], [64, 32]]]]], [], []], "format", "MMMM Do YYYY", "firstDay", 0], ["loc", [null, [61, 14], [66, 28]]]], ["attribute", "disabled", ["get", "saveBtnDisabled", ["loc", [null, [74, 63], [74, 78]]]]]],
+        statements: [["attribute", "onsubmit", ["subexpr", "action", ["save"], [], ["loc", [null, [2, 17], [2, 34]]]]], ["content", "patient.fullName", ["loc", [null, [11, 12], [11, 32]]]], ["inline", "moment-format", [["get", "huddle.date", ["loc", [null, [35, 28], [35, 39]]]], "MMM DD, YYYY"], [], ["loc", [null, [35, 12], [35, 56]]]], ["inline", "pikaday-input", [], ["id", "reviewDate", "class", "form-control form-input-calendar", "value", ["subexpr", "@mut", [["get", "reviewDate", ["loc", [null, [64, 22], [64, 32]]]]], [], []], "format", "MMMM Do YYYY", "firstDay", 0], ["loc", [null, [61, 14], [66, 28]]]], ["block", "if", [["get", "skippable", ["loc", [null, [74, 12], [74, 21]]]]], [], 0, null, ["loc", [null, [74, 6], [76, 13]]]], ["attribute", "disabled", ["get", "saveBtnDisabled", ["loc", [null, [77, 63], [77, 78]]]]]],
         locals: [],
-        templates: []
+        templates: [child0]
       };
     })();
     return {
@@ -17351,8 +17589,8 @@ define("ember-on-fhir/templates/components/review-patient-modal", ["exports"], f
             "column": 0
           },
           "end": {
-            "line": 77,
-            "column": 20
+            "line": 81,
+            "column": 0
           }
         },
         "moduleName": "ember-on-fhir/templates/components/review-patient-modal.hbs"
@@ -17374,7 +17612,7 @@ define("ember-on-fhir/templates/components/review-patient-modal", ["exports"], f
         dom.insertBoundary(fragment, null);
         return morphs;
       },
-      statements: [["block", "bootstrap-modal", [], ["title", "Mark Patient as Discussed", "onOpen", ["subexpr", "@mut", [["get", "attrs.onOpen", ["loc", [null, [1, 60], [1, 72]]]]], [], []], "onClose", ["subexpr", "@mut", [["get", "attrs.onClose", ["loc", [null, [1, 81], [1, 94]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [77, 20]]]]],
+      statements: [["block", "bootstrap-modal", [], ["title", ["subexpr", "@mut", [["get", "modalTitle", ["loc", [null, [1, 25], [1, 35]]]]], [], []], "onOpen", ["subexpr", "@mut", [["get", "attrs.onOpen", ["loc", [null, [1, 43], [1, 55]]]]], [], []], "onClose", ["subexpr", "@mut", [["get", "attrs.onClose", ["loc", [null, [1, 64], [1, 77]]]]], [], []]], 0, null, ["loc", [null, [1, 0], [80, 20]]]]],
       locals: [],
       templates: [child0]
     };
@@ -18737,6 +18975,69 @@ define("ember-on-fhir/templates/login", ["exports"], function (exports) {
     };
   })());
 });
+define("ember-on-fhir/templates/patients", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "triple-curlies"
+        },
+        "revision": "Ember@2.3.0",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 7,
+            "column": 6
+          }
+        },
+        "moduleName": "ember-on-fhir/templates/patients.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "container patients");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "title-panel print-small");
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("span");
+        dom.setAttribute(el3, "class", "title-text");
+        var el4 = dom.createTextNode("Patients");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 3, 3);
+        return morphs;
+      },
+      statements: [["content", "outlet", ["loc", [null, [6, 2], [6, 12]]]]],
+      locals: [],
+      templates: []
+    };
+  })());
+});
 define("ember-on-fhir/templates/patients/index", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
@@ -18880,11 +19181,11 @@ define("ember-on-fhir/templates/patients/index", ["exports"], function (exports)
           "loc": {
             "source": null,
             "start": {
-              "line": 42,
+              "line": 43,
               "column": 10
             },
             "end": {
-              "line": 44,
+              "line": 45,
               "column": 10
             }
           },
@@ -18909,7 +19210,7 @@ define("ember-on-fhir/templates/patients/index", ["exports"], function (exports)
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["inline", "patient-badge", [], ["patient", ["subexpr", "@mut", [["get", "patient", ["loc", [null, [43, 36], [43, 43]]]]], [], []], "huddles", ["subexpr", "patient-huddles", [["get", "model.huddles", ["loc", [null, [43, 69], [43, 82]]]], ["get", "patient", ["loc", [null, [43, 83], [43, 90]]]]], [], ["loc", [null, [43, 52], [43, 91]]]], "assessment", ["subexpr", "@mut", [["get", "currentAssessment", ["loc", [null, [43, 103], [43, 120]]]]], [], []]], ["loc", [null, [43, 12], [43, 122]]]]],
+        statements: [["inline", "patient-badge", [], ["patient", ["subexpr", "@mut", [["get", "patient", ["loc", [null, [44, 36], [44, 43]]]]], [], []], "huddles", ["subexpr", "patient-huddles", [["get", "model.huddles", ["loc", [null, [44, 69], [44, 82]]]], ["get", "patient", ["loc", [null, [44, 83], [44, 90]]]]], [], ["loc", [null, [44, 52], [44, 91]]]], "assessment", ["subexpr", "@mut", [["get", "currentAssessment", ["loc", [null, [44, 103], [44, 120]]]]], [], []]], ["loc", [null, [44, 12], [44, 122]]]]],
         locals: ["patient"],
         templates: []
       };
@@ -18927,7 +19228,7 @@ define("ember-on-fhir/templates/patients/index", ["exports"], function (exports)
             "column": 0
           },
           "end": {
-            "line": 52,
+            "line": 53,
             "column": 0
           }
         },
@@ -18983,7 +19284,7 @@ define("ember-on-fhir/templates/patients/index", ["exports"], function (exports)
         var el6 = dom.createTextNode(")\n\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("div");
-        dom.setAttribute(el6, "class", "pull-right");
+        dom.setAttribute(el6, "class", "patient-list-results-buttons pull-right");
         var el7 = dom.createTextNode("\n            ");
         dom.appendChild(el6, el7);
         var el7 = dom.createElement("div");
@@ -19001,10 +19302,10 @@ define("ember-on-fhir/templates/patients/index", ["exports"], function (exports)
         var el8 = dom.createTextNode("\n            ");
         dom.appendChild(el7, el8);
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n            ");
+        var el7 = dom.createTextNode("\n            \n            ");
         dom.appendChild(el6, el7);
         var el7 = dom.createElement("i");
-        dom.setAttribute(el7, "class", "fa fa-print fa-rounded cursor-pointer");
+        dom.setAttribute(el7, "class", "print-list-button fa fa-print cursor-pointer");
         dom.setAttribute(el7, "title", "Print Patient List");
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode("\n          ");
@@ -19073,7 +19374,7 @@ define("ember-on-fhir/templates/patients/index", ["exports"], function (exports)
         morphs[9] = dom.createMorphAt(element7, 3, 3);
         return morphs;
       },
-      statements: [["block", "nested-panel", [], ["panelName", "Risk Assessment", "panelId", "chooseRiskAssessment"], 0, null, ["loc", [null, [3, 4], [5, 21]]]], ["block", "nested-panel", [], ["panelName", "Filters", "panelId", "chooseFilters"], 1, null, ["loc", [null, [7, 4], [13, 21]]]], ["block", "nested-panel", [], ["panelName", "Sort By", "panelId", "chooseSortBy"], 2, null, ["loc", [null, [15, 4], [17, 21]]]], ["content", "totalPatients", ["loc", [null, [24, 20], [24, 37]]]], ["attribute", "class", ["concat", ["sliding-search ", ["subexpr", "if", [["get", "patientSearch", ["loc", [null, [31, 43], [31, 56]]]], "expanded"], [], ["loc", [null, [31, 38], [31, 69]]]]]]], ["attribute", "onkeyup", ["subexpr", "action", [["subexpr", "mut", [["get", "patientSearch", ["loc", [null, [32, 38], [32, 51]]]]], [], ["loc", [null, [32, 33], [32, 52]]]]], ["value", "target.value"], ["loc", [null, [32, 24], [32, 75]]]]], ["attribute", "onchange", ["subexpr", "action", [["subexpr", "mut", [["get", "patientSearch", ["loc", [null, [33, 39], [33, 52]]]]], [], ["loc", [null, [33, 34], [33, 53]]]]], ["value", "target.value"], ["loc", [null, [33, 25], [33, 76]]]]], ["attribute", "onclick", ["subexpr", "action", ["openPatientPrintList"], [], ["loc", [null, [35, 96], [35, 129]]]]], ["block", "each", [["get", "populationPatients", ["loc", [null, [42, 18], [42, 36]]]]], [], 3, null, ["loc", [null, [42, 10], [44, 19]]]], ["inline", "page-numbers", [], ["content", ["subexpr", "@mut", [["get", "content.patients", ["loc", [null, [46, 33], [46, 49]]]]], [], []], "action", ["subexpr", "action", ["setPage"], [], ["loc", [null, [46, 57], [46, 75]]]]], ["loc", [null, [46, 10], [46, 77]]]]],
+      statements: [["block", "nested-panel", [], ["panelName", "Risk Assessment", "panelId", "chooseRiskAssessment"], 0, null, ["loc", [null, [3, 4], [5, 21]]]], ["block", "nested-panel", [], ["panelName", "Filters", "panelId", "chooseFilters"], 1, null, ["loc", [null, [7, 4], [13, 21]]]], ["block", "nested-panel", [], ["panelName", "Sort By", "panelId", "chooseSortBy"], 2, null, ["loc", [null, [15, 4], [17, 21]]]], ["content", "totalPatients", ["loc", [null, [24, 20], [24, 37]]]], ["attribute", "class", ["concat", ["sliding-search ", ["subexpr", "if", [["get", "patientSearch", ["loc", [null, [31, 43], [31, 56]]]], "expanded"], [], ["loc", [null, [31, 38], [31, 69]]]]]]], ["attribute", "onkeyup", ["subexpr", "action", [["subexpr", "mut", [["get", "patientSearch", ["loc", [null, [32, 38], [32, 51]]]]], [], ["loc", [null, [32, 33], [32, 52]]]]], ["value", "target.value"], ["loc", [null, [32, 24], [32, 75]]]]], ["attribute", "onchange", ["subexpr", "action", [["subexpr", "mut", [["get", "patientSearch", ["loc", [null, [33, 39], [33, 52]]]]], [], ["loc", [null, [33, 34], [33, 53]]]]], ["value", "target.value"], ["loc", [null, [33, 25], [33, 76]]]]], ["attribute", "onclick", ["subexpr", "action", ["openPatientPrintList"], [], ["loc", [null, [36, 103], [36, 136]]]]], ["block", "each", [["get", "populationPatients", ["loc", [null, [43, 18], [43, 36]]]]], [], 3, null, ["loc", [null, [43, 10], [45, 19]]]], ["inline", "page-numbers", [], ["content", ["subexpr", "@mut", [["get", "content.patients", ["loc", [null, [47, 33], [47, 49]]]]], [], []], "action", ["subexpr", "action", ["setPage"], [], ["loc", [null, [47, 57], [47, 75]]]]], ["loc", [null, [47, 10], [47, 77]]]]],
       locals: [],
       templates: [child0, child1, child2, child3]
     };
@@ -19664,80 +19965,6 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
       };
     })();
     var child1 = (function () {
-      var child0 = (function () {
-        return {
-          meta: {
-            "fragmentReason": false,
-            "revision": "Ember@2.3.0",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 8,
-                "column": 12
-              },
-              "end": {
-                "line": 8,
-                "column": 151
-              }
-            },
-            "moduleName": "ember-on-fhir/templates/patients/show.hbs"
-          },
-          isEmpty: false,
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createElement("i");
-            dom.setAttribute(el1, "class", "fa fa-chevron-left");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes() {
-            return [];
-          },
-          statements: [],
-          locals: [],
-          templates: []
-        };
-      })();
-      var child1 = (function () {
-        return {
-          meta: {
-            "fragmentReason": false,
-            "revision": "Ember@2.3.0",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 11,
-                "column": 12
-              },
-              "end": {
-                "line": 11,
-                "column": 151
-              }
-            },
-            "moduleName": "ember-on-fhir/templates/patients/show.hbs"
-          },
-          isEmpty: false,
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createElement("i");
-            dom.setAttribute(el1, "class", "fa fa-chevron-right");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes() {
-            return [];
-          },
-          statements: [],
-          locals: [],
-          templates: []
-        };
-      })();
       return {
         meta: {
           "fragmentReason": false,
@@ -19763,9 +19990,10 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
           var el0 = dom.createDocumentFragment();
           var el1 = dom.createTextNode("            ");
           dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
+          var el1 = dom.createElement("i");
+          dom.setAttribute(el1, "class", "fa fa-chevron-left cursor-pointer");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n            \n            ");
+          var el1 = dom.createTextNode("\n\n            ");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -19773,25 +20001,28 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n            ");
+          var el1 = dom.createTextNode("\n\n            ");
           dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
+          var el1 = dom.createElement("i");
+          dom.setAttribute(el1, "class", "fa fa-chevron-right cursor-pointer");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n\n");
+          var el1 = dom.createTextNode("\n");
           dom.appendChild(el0, el1);
           return el0;
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var element0 = dom.childAt(fragment, [1]);
+          var element1 = dom.childAt(fragment, [7]);
           var morphs = new Array(4);
-          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          morphs[0] = dom.createAttrMorph(element0, 'onclick');
           morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
           morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
-          morphs[3] = dom.createMorphAt(fragment, 7, 7, contextualElement);
+          morphs[3] = dom.createAttrMorph(element1, 'onclick');
           return morphs;
         },
-        statements: [["block", "link-to", ["patients.show", ["get", "prevPatient.firstObject", ["loc", [null, [8, 39], [8, 62]]]]], ["invokeAction", ["subexpr", "action", ["changeCurrentPatientIndex", -1], [], ["loc", [null, [8, 76], [8, 115]]]]], 0, null, ["loc", [null, [8, 12], [8, 163]]]], ["content", "currentPatientIndex", ["loc", [null, [10, 12], [10, 35]]]], ["content", "huddleCount", ["loc", [null, [10, 38], [10, 53]]]], ["block", "link-to", ["patients.show", ["get", "nextPatient.firstObject", ["loc", [null, [11, 39], [11, 62]]]]], ["invokeAction", ["subexpr", "action", ["changeCurrentPatientIndex", 1], [], ["loc", [null, [11, 76], [11, 114]]]]], 1, null, ["loc", [null, [11, 12], [11, 163]]]]],
+        statements: [["attribute", "onclick", ["subexpr", "action", ["moveToPrevPatient"], [], ["loc", [null, [8, 65], [8, 95]]]]], ["content", "currentPatientIndex", ["loc", [null, [10, 12], [10, 35]]]], ["content", "huddleCount", ["loc", [null, [10, 38], [10, 53]]]], ["attribute", "onclick", ["subexpr", "action", ["moveToNextPatient", false], [], ["loc", [null, [12, 66], [12, 102]]]]]],
         locals: [],
-        templates: [child0, child1]
+        templates: []
       };
     })();
     var child2 = (function () {
@@ -19802,11 +20033,11 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
           "loc": {
             "source": null,
             "start": {
-              "line": 36,
+              "line": 37,
               "column": 0
             },
             "end": {
-              "line": 38,
+              "line": 39,
               "column": 0
             }
           },
@@ -19831,7 +20062,7 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["inline", "add-intervention-modal", [], ["onClose", ["subexpr", "action", ["hideAddInterventionModal"], [], ["loc", [null, [37, 35], [37, 70]]]]], ["loc", [null, [37, 2], [37, 72]]]]],
+        statements: [["inline", "add-intervention-modal", [], ["onClose", ["subexpr", "action", ["hideAddInterventionModal"], [], ["loc", [null, [38, 35], [38, 70]]]]], ["loc", [null, [38, 2], [38, 72]]]]],
         locals: [],
         templates: []
       };
@@ -19844,11 +20075,11 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
           "loc": {
             "source": null,
             "start": {
-              "line": 40,
+              "line": 41,
               "column": 0
             },
             "end": {
-              "line": 42,
+              "line": 43,
               "column": 0
             }
           },
@@ -19873,7 +20104,7 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["inline", "add-to-huddle-modal", [], ["patient", ["subexpr", "@mut", [["get", "model", ["loc", [null, [41, 32], [41, 37]]]]], [], []], "defaultDate", ["subexpr", "@mut", [["get", "defaultAddHuddleDate", ["loc", [null, [41, 50], [41, 70]]]]], [], []], "patientHuddles", ["subexpr", "@mut", [["get", "huddles", ["loc", [null, [41, 86], [41, 93]]]]], [], []], "onClose", ["subexpr", "action", ["hideAddHuddleModal"], [], ["loc", [null, [41, 102], [41, 131]]]]], ["loc", [null, [41, 2], [41, 133]]]]],
+        statements: [["inline", "add-to-huddle-modal", [], ["patient", ["subexpr", "@mut", [["get", "model", ["loc", [null, [42, 32], [42, 37]]]]], [], []], "defaultDate", ["subexpr", "@mut", [["get", "defaultAddHuddleDate", ["loc", [null, [42, 50], [42, 70]]]]], [], []], "patientHuddles", ["subexpr", "@mut", [["get", "huddles", ["loc", [null, [42, 86], [42, 93]]]]], [], []], "onClose", ["subexpr", "action", ["hideAddHuddleModal"], [], ["loc", [null, [42, 102], [42, 131]]]]], ["loc", [null, [42, 2], [42, 133]]]]],
         locals: [],
         templates: []
       };
@@ -19886,11 +20117,11 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
           "loc": {
             "source": null,
             "start": {
-              "line": 44,
+              "line": 45,
               "column": 0
             },
             "end": {
-              "line": 46,
+              "line": 52,
               "column": 0
             }
           },
@@ -19915,7 +20146,7 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["inline", "review-patient-modal", [], ["patient", ["subexpr", "@mut", [["get", "model", ["loc", [null, [45, 33], [45, 38]]]]], [], []], "huddle", ["subexpr", "@mut", [["get", "reviewPatientHuddle", ["loc", [null, [45, 46], [45, 65]]]]], [], []], "onClose", ["subexpr", "action", ["hideReviewPatientModal"], [], ["loc", [null, [45, 74], [45, 107]]]]], ["loc", [null, [45, 2], [45, 109]]]]],
+        statements: [["inline", "review-patient-modal", [], ["patient", ["subexpr", "@mut", [["get", "model", ["loc", [null, [47, 12], [47, 17]]]]], [], []], "huddle", ["subexpr", "@mut", [["get", "reviewPatientHuddle", ["loc", [null, [48, 11], [48, 30]]]]], [], []], "skippable", ["subexpr", "@mut", [["get", "reviewPatientModalSkippable", ["loc", [null, [49, 14], [49, 41]]]]], [], []], "onSkip", ["subexpr", "action", ["moveToNextPatient", true], [], ["loc", [null, [50, 11], [50, 44]]]], "onClose", ["subexpr", "action", ["hideReviewPatientModal"], [], ["loc", [null, [51, 12], [51, 45]]]]], ["loc", [null, [46, 2], [51, 47]]]]],
         locals: [],
         templates: []
       };
@@ -19934,7 +20165,7 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
             "column": 0
           },
           "end": {
-            "line": 47,
+            "line": 53,
             "column": 0
           }
         },
@@ -19978,7 +20209,7 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
         var el5 = dom.createTextNode("\n      ");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n      ");
+        var el4 = dom.createTextNode("\n\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
         dom.setAttribute(el4, "class", "patient-panel-body clearfix");
@@ -20013,84 +20244,21 @@ define("ember-on-fhir/templates/patients/show", ["exports"], function (exports) 
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0, 1, 1]);
-        var element1 = dom.childAt(element0, [1]);
+        var element2 = dom.childAt(fragment, [0, 1, 1]);
+        var element3 = dom.childAt(element2, [1]);
         var morphs = new Array(6);
-        morphs[0] = dom.createMorphAt(element1, 1, 1);
-        morphs[1] = dom.createMorphAt(dom.childAt(element1, [3]), 1, 1);
-        morphs[2] = dom.createMorphAt(dom.childAt(element0, [3]), 1, 1);
+        morphs[0] = dom.createMorphAt(element3, 1, 1);
+        morphs[1] = dom.createMorphAt(dom.childAt(element3, [3]), 1, 1);
+        morphs[2] = dom.createMorphAt(dom.childAt(element2, [3]), 1, 1);
         morphs[3] = dom.createMorphAt(fragment, 2, 2, contextualElement);
         morphs[4] = dom.createMorphAt(fragment, 4, 4, contextualElement);
         morphs[5] = dom.createMorphAt(fragment, 6, 6, contextualElement);
         dom.insertBoundary(fragment, null);
         return morphs;
       },
-      statements: [["block", "link-to", ["patients.index"], [], 0, null, ["loc", [null, [5, 8], [5, 105]]]], ["block", "if", [["get", "huddlePatients", ["loc", [null, [7, 16], [7, 30]]]]], [], 1, null, ["loc", [null, [7, 10], [13, 17]]]], ["inline", "patient-viewer", [], ["riskAssessments", ["subexpr", "@mut", [["get", "riskAssessments", ["loc", [null, [18, 26], [18, 41]]]]], [], []], "patient", ["subexpr", "@mut", [["get", "model", ["loc", [null, [19, 18], [19, 23]]]]], [], []], "currentAssessment", ["subexpr", "@mut", [["get", "currentAssessment", ["loc", [null, [20, 28], [20, 45]]]]], [], []], "selectedCategory", ["subexpr", "@mut", [["get", "selectedCategory", ["loc", [null, [21, 27], [21, 43]]]]], [], []], "huddles", ["subexpr", "@mut", [["get", "huddles", ["loc", [null, [22, 18], [22, 25]]]]], [], []], "setRiskAssessment", ["subexpr", "action", ["setRiskAssessment"], [], ["loc", [null, [23, 28], [23, 56]]]], "selectCategory", ["subexpr", "action", ["selectCategory"], [], ["loc", [null, [24, 25], [24, 50]]]], "openAddInterventionModal", ["subexpr", "action", ["openAddInterventionModal"], [], ["loc", [null, [25, 35], [25, 70]]]], "openAddHuddleModal", ["subexpr", "action", ["openAddHuddleModal"], [], ["loc", [null, [26, 29], [26, 58]]]], "openReviewPatientModal", ["subexpr", "action", ["openReviewPatientModal"], [], ["loc", [null, [27, 33], [27, 66]]]], "registerPatientViewer", ["subexpr", "action", ["registerPatientViewer"], [], ["loc", [null, [28, 32], [28, 64]]]], "unregisterPatientViewer", ["subexpr", "action", ["unregisterPatientViewer"], [], ["loc", [null, [29, 34], [29, 68]]]], "refreshHuddles", ["subexpr", "action", ["refreshHuddles"], [], ["loc", [null, [30, 25], [30, 50]]]]], ["loc", [null, [17, 8], [30, 52]]]], ["block", "if", [["get", "showAddInterventionModal", ["loc", [null, [36, 6], [36, 30]]]]], [], 2, null, ["loc", [null, [36, 0], [38, 7]]]], ["block", "if", [["get", "showAddHuddleModal", ["loc", [null, [40, 6], [40, 24]]]]], [], 3, null, ["loc", [null, [40, 0], [42, 7]]]], ["block", "if", [["get", "showReviewPatientModal", ["loc", [null, [44, 6], [44, 28]]]]], [], 4, null, ["loc", [null, [44, 0], [46, 7]]]]],
+      statements: [["block", "link-to", ["patients.index"], [], 0, null, ["loc", [null, [5, 8], [5, 105]]]], ["block", "if", [["get", "huddlePatients", ["loc", [null, [7, 16], [7, 30]]]]], [], 1, null, ["loc", [null, [7, 10], [13, 17]]]], ["inline", "patient-viewer", [], ["riskAssessments", ["subexpr", "@mut", [["get", "riskAssessments", ["loc", [null, [19, 26], [19, 41]]]]], [], []], "patient", ["subexpr", "@mut", [["get", "model", ["loc", [null, [20, 18], [20, 23]]]]], [], []], "currentAssessment", ["subexpr", "@mut", [["get", "currentAssessment", ["loc", [null, [21, 28], [21, 45]]]]], [], []], "selectedCategory", ["subexpr", "@mut", [["get", "selectedCategory", ["loc", [null, [22, 27], [22, 43]]]]], [], []], "huddles", ["subexpr", "@mut", [["get", "huddles", ["loc", [null, [23, 18], [23, 25]]]]], [], []], "setRiskAssessment", ["subexpr", "action", ["setRiskAssessment"], [], ["loc", [null, [24, 28], [24, 56]]]], "selectCategory", ["subexpr", "action", ["selectCategory"], [], ["loc", [null, [25, 25], [25, 50]]]], "openAddInterventionModal", ["subexpr", "action", ["openAddInterventionModal"], [], ["loc", [null, [26, 35], [26, 70]]]], "openAddHuddleModal", ["subexpr", "action", ["openAddHuddleModal"], [], ["loc", [null, [27, 29], [27, 58]]]], "openReviewPatientModal", ["subexpr", "action", ["openReviewPatientModal"], [], ["loc", [null, [28, 33], [28, 66]]]], "registerPatientViewer", ["subexpr", "action", ["registerPatientViewer"], [], ["loc", [null, [29, 32], [29, 64]]]], "unregisterPatientViewer", ["subexpr", "action", ["unregisterPatientViewer"], [], ["loc", [null, [30, 34], [30, 68]]]], "refreshHuddles", ["subexpr", "action", ["refreshHuddles"], [], ["loc", [null, [31, 25], [31, 50]]]]], ["loc", [null, [18, 8], [31, 52]]]], ["block", "if", [["get", "showAddInterventionModal", ["loc", [null, [37, 6], [37, 30]]]]], [], 2, null, ["loc", [null, [37, 0], [39, 7]]]], ["block", "if", [["get", "showAddHuddleModal", ["loc", [null, [41, 6], [41, 24]]]]], [], 3, null, ["loc", [null, [41, 0], [43, 7]]]], ["block", "if", [["get", "showReviewPatientModal", ["loc", [null, [45, 6], [45, 28]]]]], [], 4, null, ["loc", [null, [45, 0], [52, 7]]]]],
       locals: [],
       templates: [child0, child1, child2, child3, child4]
-    };
-  })());
-});
-define("ember-on-fhir/templates/patients", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    return {
-      meta: {
-        "fragmentReason": {
-          "name": "triple-curlies"
-        },
-        "revision": "Ember@2.3.0",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 7,
-            "column": 6
-          }
-        },
-        "moduleName": "ember-on-fhir/templates/patients.hbs"
-      },
-      isEmpty: false,
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "class", "container patients");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "title-panel print-small");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("span");
-        dom.setAttribute(el3, "class", "title-text");
-        var el4 = dom.createTextNode("Patients");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 3, 3);
-        return morphs;
-      },
-      statements: [["content", "outlet", ["loc", [null, [6, 2], [6, 12]]]]],
-      locals: [],
-      templates: []
     };
   })());
 });
@@ -20721,7 +20889,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("ember-on-fhir/app")["default"].create({"name":"ember-on-fhir","version":"0.0.0+d90bad8f"});
+  require("ember-on-fhir/app")["default"].create({"name":"ember-on-fhir","version":"0.0.0+5636e75a"});
 }
 
 /* jshint ignore:end */

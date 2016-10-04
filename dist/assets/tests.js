@@ -83,23 +83,6 @@ define('ember-on-fhir/tests/authorizers/ie.jshint', ['exports'], function (expor
     assert.ok(true, 'authorizers/ie.js should pass jshint.');
   });
 });
-define('ember-on-fhir/tests/components/add-intervention-modal/intervention-detail.jscs-test', ['exports'], function (exports) {
-  'use strict';
-
-  module('JSCS - components/add-intervention-modal');
-  test('components/add-intervention-modal/intervention-detail.js should pass jscs', function () {
-    ok(true, 'components/add-intervention-modal/intervention-detail.js should pass jscs.');
-  });
-});
-define('ember-on-fhir/tests/components/add-intervention-modal/intervention-detail.jshint', ['exports'], function (exports) {
-  'use strict';
-
-  QUnit.module('JSHint - components/add-intervention-modal');
-  QUnit.test('components/add-intervention-modal/intervention-detail.js should pass jshint', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'components/add-intervention-modal/intervention-detail.js should pass jshint.');
-  });
-});
 define('ember-on-fhir/tests/components/add-intervention-modal.jscs-test', ['exports'], function (exports) {
   'use strict';
 
@@ -115,6 +98,23 @@ define('ember-on-fhir/tests/components/add-intervention-modal.jshint', ['exports
   QUnit.test('components/add-intervention-modal.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'components/add-intervention-modal.js should pass jshint.');
+  });
+});
+define('ember-on-fhir/tests/components/add-intervention-modal/intervention-detail.jscs-test', ['exports'], function (exports) {
+  'use strict';
+
+  module('JSCS - components/add-intervention-modal');
+  test('components/add-intervention-modal/intervention-detail.js should pass jscs', function () {
+    ok(true, 'components/add-intervention-modal/intervention-detail.js should pass jscs.');
+  });
+});
+define('ember-on-fhir/tests/components/add-intervention-modal/intervention-detail.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - components/add-intervention-modal');
+  QUnit.test('components/add-intervention-modal/intervention-detail.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'components/add-intervention-modal/intervention-detail.js should pass jshint.');
   });
 });
 define('ember-on-fhir/tests/components/add-to-huddle-modal.jscs-test', ['exports'], function (exports) {
